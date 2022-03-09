@@ -16,10 +16,19 @@ import java.util.List;
 public class TestEndpoint {
 
 	@GET
+	@Path("/hello")
 	@Produces(MediaType.TEXT_HTML)
 	public String helloWorld() {
-		return "Hello Wor";
+		return "Hello World";
 	}
+
+
+
+
+
+
+
+
 
 	@GET
 	@Path("/list")
