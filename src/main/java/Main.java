@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
-import com.dant.entity.Trip;
+
+import com.dant.entity.*;
 
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -14,9 +12,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String st = "https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2009-01.csv";
-        URL stockURL = new URL(st);
-        BufferedReader in = new BufferedReader(new InputStreamReader(stockURL.openStream()));
+        //String st = "https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2009-01.csv";
+        //URL stockURL = new URL(st);
+        BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\U1\\Downloads\\yellow_tripdata_2009-01.csv"));
+
         /*
         String s = in.readLine();
         System.out.println(s);
@@ -25,21 +24,35 @@ public class Main {
         s = in.readLine();
         System.out.println(s);
         */
+
+        //Table table = new Table();
         String s = null;
         s=in.readLine();
-        s=in.readLine();
-        int nbtrip = 0;
-        ArrayList<Trip> ListTrip  = new ArrayList<Trip>();
-        while ((s=in.readLine())!=null && nbtrip<50000) {
-            String[] line = s.split(",");
-            //Trip trip = new Trip(line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12],line[13],line[14],line[15],line[16],line[17]);
-            Trip trip = new Trip(line);
-            //System.out.println(trip);
-            ListTrip.add(trip);
-            nbtrip += 1;
-            //System.out.println(s);
+
+        String[] columnsCSV = s.split(",");
+        Column[] columns =  new Column[columnsCSV.length];
+
+        for(int i = 0; i < columnsCSV.length; i++){
+            columns[i] = new Column(columnsCSV[i], "String");
         }
-        System.out.println(ListTrip.get(40000));
+
+        s=in.readLine();
+        String[][] data = new String[10000000][columns.length];
+        int i = 0;
+        while ((s=in.readLine())!=null && i < 10000000) {
+            String[] line = s.split(",");
+            data[i]=line;
+            i++;
+            /*
+            for(int j = 0; j < line.length; j++){
+                //System.out.print(line[j]+" ");
+            }*/
+            //System.out.println();
+        }
+        BasicStorage basicStorage = new BasicStorage(data);
+        Table table = new Table(columns, "Taxi", basicStorage);
+
+        //System.out.println(ListTrip.get(40000));
         System.out.println("fin");
     }
 }

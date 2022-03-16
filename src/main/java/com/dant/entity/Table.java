@@ -3,12 +3,17 @@ package com.dant.entity;
 public class Table {
     private Column [] columns;
     private String name;
-    private Storage storage;
+    private BasicStorage basicStorage;
 
-    public Table(Column[] columns, String name, Storage storage) {
+    public Table(Column[] columns, String name, BasicStorage basicStorage) {
         this.columns = columns;
         this.name = name;
-        this.storage = storage;
+        this.basicStorage = basicStorage;
+    }
+
+    public Table(Column[] columns, String name) {
+        this.columns = columns;
+        this.name = name;
     }
 
     public Column[] getColumns() {
@@ -19,8 +24,8 @@ public class Table {
         return name;
     }
 
-    public Storage getStorage() {
-        return storage;
+    public BasicStorage getBasicStorage() {
+        return basicStorage;
     }
 
     public void setColumns(Column[] columns) {
@@ -31,7 +36,7 @@ public class Table {
         this.name = name;
     }
 
-    public void setStorage(Storage storage) {
-        this.storage = storage;
+    public void setStorage(BasicStorage basicStorage) {
+        this.basicStorage = basicStorage;
     }
 }
