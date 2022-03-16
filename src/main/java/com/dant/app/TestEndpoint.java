@@ -1,10 +1,14 @@
 package com.dant.app;
 
 import com.dant.entity.Account;
+import com.dant.entity.Table;
+import com.dant.entity.Utils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,16 +18,18 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TestEndpoint {
+	//private final Table table = Utils.loadTableFromData();
 
 	@GET
 	@Path("/hello")
-	@Produces(MediaType.TEXT_HTML)
-	public String helloWorld() {
-		return "Hello World";
+	@Produces(MediaType.APPLICATION_JSON)
+	public String helloWorld() throws IOException {
+		Table table = Utils.loadTableFromData();
+		return table.getBasicStorage().toString();
 	}
 
 	@GET
-	@Path("/list")
+	@Path("/vendorname")
 	public List<String> getListInParams(@QueryParam("ids") List<String> ids) {
 		System.out.println(ids);
 		return ids;

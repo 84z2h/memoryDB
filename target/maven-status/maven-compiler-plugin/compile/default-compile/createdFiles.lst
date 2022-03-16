@@ -5,6 +5,7 @@ com\dant\entity\Trip.class
 com\dant\entity\Column.class
 com\dant\entity\Storage.class
 com\dant\entity\Table.class
+com\dant\entity\Utils.class
 com\dant\app\TestEndpoint.class
 com\dant\entity\Account.class
 com\dant\filter\GsonProvider.class

@@ -1,16 +1,13 @@
-import java.io.*;
-import java.net.URL;
+package com.dant.entity;
 
-import com.dant.entity.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+public class Utils {
 
-
-public class Main {
-
-    public static void main(String[] args) throws IOException {
+    public static Table loadTableFromData() throws IOException {
         BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\U1\\Downloads\\yellow_tripdata_2009-01.csv"));
 
         String s = null;
@@ -24,9 +21,9 @@ public class Main {
         }
 
         s=in.readLine();
-        String[][] data = new String[10000000][columns.length];
+        String[][] data = new String[10000][columns.length];
         int i = 0;
-        while ((s=in.readLine())!=null && i < 10000000) {
+        while ((s=in.readLine())!=null && i < 10000) {
             String[] line = s.split(",");
             data[i]=line;
             i++;
@@ -40,5 +37,7 @@ public class Main {
         Table table = new Table(columns, "Taxi", basicStorage);
 
         System.out.println("fin");
+
+        return table;
     }
 }
