@@ -22,14 +22,6 @@ public class TestEndpoint {
 		return "Hello World";
 	}
 
-
-
-
-
-
-
-
-
 	@GET
 	@Path("/list")
 	public List<String> getListInParams(@QueryParam("ids") List<String> ids) {
