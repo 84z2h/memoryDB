@@ -1,4 +1,4 @@
-package com.dant.entity;
+package com.dant.storage;
 
 import java.util.List;
 

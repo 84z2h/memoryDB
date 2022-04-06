@@ -1,5 +1,7 @@
 package com.dant.entity;
 
+import com.dant.storage.BasicStorage;
+
 public class Table {
     private static Column [] columns;
     private String name;
