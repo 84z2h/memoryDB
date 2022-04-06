@@ -32,7 +32,7 @@ public class SelectEndpoint {
 ////		Table table = Utils.loadTableFromData();
 ////		return table.getBasicStorage().select("vendor_name");
 ////	}
-	
+
 	@GET
 	@Path("/exception")
 	public Response exception() {
