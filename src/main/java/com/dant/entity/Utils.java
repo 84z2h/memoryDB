@@ -4,26 +4,28 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Utils {
 
     public static Table loadTableFromData() throws IOException {
-        BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\U1\\Downloads\\yellow_tripdata_2009-01.csv"));
+        System.out.println("start loading data");
+        BufferedReader in = new BufferedReader(new FileReader("yellow_tripdata_2009-01.csv"));
 
         String s = null;
         s=in.readLine();
 
         String[] columnsCSV = s.split(",");
         Column[] columns =  new Column[columnsCSV.length];
-
+        System.out.println(Arrays.toString(columnsCSV));
         for(int i = 0; i < columnsCSV.length; i++){
             columns[i] = new Column(columnsCSV[i], "String");
         }
 
         s=in.readLine();
-        String[][] data = new String[10000][columns.length];
+        String[][] data = new String[1000000][columns.length];
         int i = 0;
-        while ((s=in.readLine())!=null && i < 10000) {
+        while ((s=in.readLine())!=null && i < 1000000) {
             String[] line = s.split(",");
             data[i]=line;
             i++;
@@ -36,7 +38,7 @@ public class Utils {
         BasicStorage basicStorage = new BasicStorage(data);
         Table table = new Table(columns, "Taxi", basicStorage);
 
-        System.out.println("fin");
+        System.out.println("end of loading data");
 
         return table;
     }

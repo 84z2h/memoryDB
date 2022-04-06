@@ -1,7 +1,7 @@
 package com.dant.entity;
 
 public class Table {
-    private Column [] columns;
+    private static Column [] columns;
     private String name;
     private BasicStorage basicStorage;
 
@@ -16,7 +16,7 @@ public class Table {
         this.name = name;
     }
 
-    public Column[] getColumns() {
+    public static Column[] getColumns() {
         return columns;
     }
 
