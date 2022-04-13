@@ -27,14 +27,14 @@ public class SelectEndpoint {
 	@GET
 	@Path("/vendorname")
 	public String SelectVendorName() throws IOException {
-		Table table = Utils.loadTableFromData();
+		Table table = Utils.loadTableFromData("yellow_tripdata_2009-01");
 		return Arrays.deepToString(table.getBasicStorage().select("vendor_name"));
 	}
 
 	@GET
 	@Path("/passengercount")
 	public String SelectPassagerCount() throws IOException {
-		Table table = Utils.loadTableFromData();
+		Table table = Utils.loadTableFromData("yellow_tripdata_2009-01");
 		return Arrays.deepToString(table.getBasicStorage().select("Passenger_Count"));
 	}
 
