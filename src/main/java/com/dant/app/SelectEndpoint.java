@@ -7,7 +7,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Created by pitton on 2017-02-20.
@@ -59,10 +58,10 @@ public class SelectEndpoint {
 	@GET
 	@Path("/select/{column}/{table}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String[][] select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
+	public String select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
 
 		Table table = Utils.loadTableFromData(tableParam);
-		return table.getBasicStorage().select(column);
+		return Utils.buildStringFromData(table.getBasicStorage().select(column));
 	}
 
 	@GET
