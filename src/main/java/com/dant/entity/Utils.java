@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class Utils {
 
-    public static Table loadTableFromData(String tab) throws IOException {
+    public static Table loadTableFromData() throws IOException {
         System.out.println("start loading data");
         BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\yellow_tripdata_2009-01.csv"));
 
@@ -42,5 +42,17 @@ public class Utils {
         System.out.println("end of loading data");
 
         return table;
+    }
+
+    public static String buildStringFromData(String [][] data){
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < data.length; i++){
+            for(int j = 0; j < data[i].length; j++){
+                res = res.append(data[i][j]).append(" ");
+            }
+            res = res.append("\n");
+        }
+        return res.toString();
+
     }
 }
