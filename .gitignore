@@ -3,7 +3,7 @@
 *.class
 
 # CSV FILE
-yellow_tripdata_2009-01.csv
+*.csv
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
