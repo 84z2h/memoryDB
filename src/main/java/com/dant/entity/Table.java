@@ -17,7 +17,14 @@ public class Table {
         this.columns = columns;
         this.name = name;
     }
-
+    public static int getColumnNumber(String columnname){
+        for(int i = 0;i < columns.length;i++){
+            if(columns[i].getName().equals(columnname)){
+                return i;
+            }
+        }
+        return 0;
+    }
     public static Column[] getColumns() {
         return columns;
     }
