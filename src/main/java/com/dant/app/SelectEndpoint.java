@@ -8,9 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-/**
- * Created by pitton on 2017-02-20.
- */
+
 @Path("/api/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,8 +19,7 @@ public class SelectEndpoint {
 	@Path("/hello")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String helloWorld() throws IOException {
-
-		Table table = Utils.loadTableFromData();
+		Table table = Utils.loadTableFromData("yellow_tripdata_2009-01");
 		return table.getBasicStorage().toString();
 	}
 
