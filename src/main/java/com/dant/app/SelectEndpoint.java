@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 @Path("/api/test")
@@ -23,12 +24,20 @@ public class SelectEndpoint {
 		return table.getBasicStorage().toString();
 	}
 
-//	@GET
-//	@Path("/vendorname")
-////	public String[] getListInParams(@QueryParam("ids") List<String> ids) throws IOException {
-////		Table table = Utils.loadTableFromData();
-////		return table.getBasicStorage().select("vendor_name");
-////	}
+	@GET
+	@Path("/vendorname")
+	public String SelectVendorName() throws IOException {
+		Table table = Utils.loadTableFromData();
+		return Arrays.deepToString(table.getBasicStorage().select("vendor_name"));
+	}
+
+	@GET
+	@Path("/passengercount")
+	public String SelectPassagerCount() throws IOException {
+		Table table = Utils.loadTableFromData();
+		return Arrays.deepToString(table.getBasicStorage().select("Passenger_Count"));
+	}
+
 
 	@GET
 	@Path("/exception")
