@@ -1,6 +1,9 @@
 package com.dant.storage;
 
+import java.util.Arrays;
 import java.util.List;
+
+import com.dant.entity.Column;
 import com.dant.entity.Table;
 public class BasicStorage {
     private String[][] data;
@@ -20,18 +23,22 @@ public class BasicStorage {
         return res.toString();
     }
 
-//    public String [] select(String column_name){
-//        String []newdata;
-//        for(int i = 0; i < data.length; i++){
-//            Column [] columns= Table.getColumns();
-//            if(columns[i].getName().equals(column_name)){
-//                System.out.println("COLUMN MATCH");
-//                for(int j = 0; j < data.length; j++){
-//                    newdata[j] = data[j][i];
-//                }
-//            }
-//        }
-//        return data[0];
-//    }
+    public String [][] select(String column_name){
+        String [][]newdata = new String[10000][1];
+        Column[] columns= Table.getColumns();
+        for(int i = 0; i < columns.length; i++){
+            if(columns[i].getName().equals(column_name)){
+                System.out.println("COLUMN MATCH");
+                for(int j = 0; j < data.length; j++){
+                    newdata[j][0] = data[j][i];
+//                    System.out.println(data[j][i]);
+                }
+            }
+        }
+        for(int j = 0; j < newdata.length; j++){
+            System.out.println(newdata[j][0]);
+        }
+        return newdata;
+    }
 
 }
