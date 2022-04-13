@@ -39,7 +39,7 @@ public class BasicStorage {
     }
 
     public String [][] select(String [] columnstab){
-        String [][]newdata = new String[10000][columnstab.length];
+        String [][]newdata = new String[100000][columnstab.length];
         Column[] columns = Table.getColumns();
         for(int i = 0; i< columnstab.length; i++){
             for(int j = 0; j < columns.length; j++){

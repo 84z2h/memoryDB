@@ -26,12 +26,13 @@ public class SelectEndpoint {
 		}
 	}
 
-//	@GET
-//	@Path("/hello")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String helloWorld() throws IOException {
-//		return table.getBasicStorage().toString();
-//	}
+	@GET
+	@Path("/select/*/{table}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String helloWorld(@PathParam("table") String tableParam) throws IOException {
+		Table table = database.getTableFromName(tableParam);
+		return table.getBasicStorage().toString();
+	}
 
 	@GET
 	@Path("/select/{column}/{table}")

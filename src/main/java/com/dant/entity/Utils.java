@@ -24,9 +24,9 @@ public class Utils {
         }
 
         s=in.readLine();
-        String[][] data = new String[10000][columns.length];
+        String[][] data = new String[100000][columns.length];
         int i = 0;
-        while ((s=in.readLine())!=null && i < 10000) {
+        while ((s=in.readLine())!=null && i < 100000) {
             String[] line = s.split(",");
             data[i]=line;
             i++;
