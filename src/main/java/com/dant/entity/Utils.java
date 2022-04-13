@@ -11,7 +11,7 @@ public class Utils {
 
     public static Table loadTableFromData(String tab) throws IOException {
         System.out.println("start loading data");
-        BufferedReader in = new BufferedReader(new FileReader("src\\main\\ressources\\yellow_tripdata_2009-01.csv"));
+        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\yellow_tripdata_2009-01.csv"));
 
         String s = null;
         s=in.readLine();

@@ -8,7 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="memoryDB" />
         <module name="projet de fou" />
+        <module name="dant" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="m" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>

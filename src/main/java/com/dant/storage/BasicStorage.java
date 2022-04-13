@@ -35,9 +35,6 @@ public class BasicStorage {
                 }
             }
         }
-        for(int j = 0; j < newdata.length; j++){
-            System.out.println(newdata[j][0]);
-        }
         return newdata;
     }
 
