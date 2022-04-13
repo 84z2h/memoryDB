@@ -11,7 +11,7 @@ public class Utils {
 
     public static Table loadTableFromData(String tablecsv) throws IOException {
         System.out.println("start loading data");
-        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\"+tablecsv+".csv"));
+        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\"+tablecsv));
 
         String s = null;
         s=in.readLine();
@@ -37,7 +37,7 @@ public class Utils {
             //System.out.println();
         }
         BasicStorage basicStorage = new BasicStorage(data);
-        Table table = new Table(columns, tablecsv, basicStorage);
+        Table table = new Table(columns, tablecsv.replace(".csv",""), basicStorage);
 
         System.out.println("end of loading data");
 
