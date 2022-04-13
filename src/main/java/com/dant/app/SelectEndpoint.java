@@ -33,29 +33,6 @@ public class SelectEndpoint {
 	}
 
 	@GET
-	@Path("/vendorname")
-	public String SelectVendorName() throws IOException {
-//		String [] tab = new String[]{"vendor_name"};
-		return Utils.buildStringFromData(table.getBasicStorage().select("vendor_name"));
-	}
-
-	@GET
-	@Path("/passengercount")
-	public String SelectPassagerCount() throws IOException {
-//		String [] tab = new String[]{"Passenger_Count"};
-		return Utils.buildStringFromData(table.getBasicStorage().select("Passenger_Count"));
-	}
-
-//	@GET
-//	@Path("/vendorname?passengercount")
-//	public String SelectColumns() throws IOException {
-//		String [] tab = new String[]{"vendor_name","Passenger_Count"};
-//		Table table = Utils.loadTableFromData();
-//		return Arrays.deepToString(table.getBasicStorage().select(tab));
-//	}
-
-
-	@GET
 	@Path("/select/{column}/{table}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
