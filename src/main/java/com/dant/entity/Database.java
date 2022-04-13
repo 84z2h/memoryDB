@@ -33,7 +33,8 @@ public class Database {
 
     public Table getTableFromName(String name){
         for(Table t : database){
-            if(t.getName()==name){
+            if(t.getName().equals(name)){
+                System.out.println("Found table");
                 return t;
             }
         }

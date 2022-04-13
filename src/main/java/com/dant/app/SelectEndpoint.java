@@ -1,5 +1,6 @@
 package com.dant.app;
 
+import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.Utils;
 
@@ -15,30 +16,30 @@ import java.io.IOException;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SelectEndpoint {
-	private static Table table = null;
+	private static Database database = null;
 
 	static {
 		try {
-			table = Utils.loadTableFromData("yellow_tripdata_2009-01");
+			database = new Database();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	@GET
-	@Path("/hello")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String helloWorld() throws IOException {
-		return table.getBasicStorage().toString();
-	}
+//	@GET
+//	@Path("/hello")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String helloWorld() throws IOException {
+//		return table.getBasicStorage().toString();
+//	}
 
 	@GET
 	@Path("/select/{column}/{table}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
-
-		Table table = Utils.loadTableFromData(tableParam);
-		return Utils.buildStringFromData(table.getBasicStorage().select(column));
+		String [] columns = column.split(",");
+		Table table = database.getTableFromName(tableParam);
+		return Utils.buildStringFromData(table.getBasicStorage().select(columns));
 	}
 
 	@GET
