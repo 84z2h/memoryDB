@@ -38,4 +38,20 @@ public class BasicStorage {
         return newdata;
     }
 
+    public String [][] select(String [] columnstab){
+        String [][]newdata = new String[10000][columnstab.length];
+        Column[] columns = Table.getColumns();
+        for(int i = 0; i< columnstab.length; i++){
+            for(int j = 0; j < columns.length; j++){
+                if(columns[j].getName().equals(columnstab[i])){
+                    System.out.println("COLUMN MATCH WITH " + columns[j].getName());
+                    for(int d = 0; d < data.length; d++){
+                        newdata[d][i] = data[d][j];
+                    }
+                }
+            }
+        }
+        return newdata;
+    }
+
 }
