@@ -57,6 +57,15 @@ public class SelectEndpoint {
 
 
 	@GET
+	@Path("/select/{column}/{table}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String[][] select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
+
+		Table table = Utils.loadTableFromData(tableParam);
+		return table.getBasicStorage().select(column);
+	}
+
+	@GET
 	@Path("/exception")
 	public Response exception() {
 		throw new RuntimeException("Mon erreur");
