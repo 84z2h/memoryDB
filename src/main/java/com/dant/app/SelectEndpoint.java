@@ -20,7 +20,7 @@ public class SelectEndpoint {
 
 	static {
 		try {
-			table = Utils.loadTableFromData();
+			table = Utils.loadTableFromData("yellow_tripdata_2009-01");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

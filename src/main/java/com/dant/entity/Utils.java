@@ -9,9 +9,9 @@ import java.util.Arrays;
 
 public class Utils {
 
-    public static Table loadTableFromData(String table) throws IOException {
+    public static Table loadTableFromData(String tablecsv) throws IOException {
         System.out.println("start loading data");
-        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\"+table+".csv"));
+        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\"+tablecsv+".csv"));
 
         String s = null;
         s=in.readLine();
