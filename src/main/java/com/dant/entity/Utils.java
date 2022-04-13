@@ -37,7 +37,7 @@ public class Utils {
             //System.out.println();
         }
         BasicStorage basicStorage = new BasicStorage(data);
-        Table table = new Table(columns, "Taxi", basicStorage);
+        Table table = new Table(columns, tablecsv, basicStorage);
 
         System.out.println("end of loading data");
 
