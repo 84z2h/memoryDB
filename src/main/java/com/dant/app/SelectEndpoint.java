@@ -3,6 +3,7 @@ package com.dant.app;
 import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.Utils;
+import org.javatuples.Triplet;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -35,11 +36,26 @@ public class SelectEndpoint {
 	}
 
 	@GET
-	@Path("/select/{column}/{table}")
+	@Path("/select/{column}/{table}/{where}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String select(@PathParam("column") String column, @PathParam("table") String tableParam) throws IOException {
+	public String select(@PathParam("column") String column, @PathParam("table") String tableParam, @PathParam("where") String whereParam) throws IOException {
 		String [] columns = column.split(",");
 		Table table = database.getTableFromName(tableParam);
+		String [] where = whereParam.split(",");
+		String [][] whereMatrice = new String[where.length][];
+		Triplet<String, String, String> [] whereTriplet = new Triplet[whereMatrice.length];
+
+		for(int i = 0; i < whereMatrice.length; i++){
+			whereMatrice[i] = where[i].split(";");
+		}
+		for(int i = 0; i < whereTriplet.length; i++){
+			whereTriplet[i] = new Triplet<String, String, String>(whereMatrice[i][0], whereMatrice[i][1], whereMatrice[i][2]);
+		}
+
+		for(int i = 0; i < whereTriplet.length; i++){
+			System.out.println(whereTriplet[i].toString());
+		}
+
 		return Utils.buildStringFromData(table.getBasicStorage().select(columns));
 	}
 
