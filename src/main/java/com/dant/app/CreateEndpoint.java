@@ -9,12 +9,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-@Path("/api/insert")
+
+@Path("/api/create")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class InsertEndpoint {
+public class CreateEndpoint {
 
-    @PUT
+    @POST
     @Path("/{name}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
     public Database CreateDB(@PathParam("table") String tableParam, @PathParam("name") String nameDB) throws IOException {

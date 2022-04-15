@@ -5,7 +5,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Database {
+    private String name;
     private ArrayList<Table> database = new ArrayList<>();
+
+    public Database(String name, String table) throws IOException {
+        this.name=name;
+        File dir = new File("src\\main\\resources");
+        File[] directoryListing = dir.listFiles();
+        if (directoryListing !=null){
+            for (File child : directoryListing){
+                if( child.getName() == table){
+                    database.add(Utils.loadTableFromData(table));
+                }
+            }
+        }
+    }
 
     public Database() throws IOException {
         File dir = new File("src\\main\\resources");
@@ -13,11 +27,10 @@ public class Database {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 database.add(Utils.loadTableFromData(child.getName()));
-
             }
         }
-
     }
+
 
     public String toString(){
         String s = "";

@@ -8,6 +8,7 @@ import org.javatuples.*;
 import com.dant.entity.Column;
 import com.dant.entity.Table;
 public class BasicStorage {
+    // private Database data;
     private String[][] data;
 
     public BasicStorage(String[][] data) {

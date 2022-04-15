@@ -10,12 +10,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-/**
- * Created by pitton on 2017-02-20.
- */
-@Path("/api/test")
+@Path("/api/select")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Consumes({MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
 public class SelectEndpoint {
 	private static Database database = null;
 
@@ -28,7 +25,7 @@ public class SelectEndpoint {
 	}
 
 	@GET
-	@Path("/select/*/{table}")
+	@Path("/*/{table}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String helloWorld(@PathParam("table") String tableParam) throws IOException {
 		Table table = database.getTableFromName(tableParam);
@@ -36,7 +33,7 @@ public class SelectEndpoint {
 	}
 
 	@GET
-	@Path("/select/{column}/{table}/{where}")
+	@Path("/{column}/{table}/{where}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String select(@PathParam("column") String column, @PathParam("table") String tableParam, @PathParam("where") String whereParam) throws IOException {
 		String [] columns = column.split(",");
