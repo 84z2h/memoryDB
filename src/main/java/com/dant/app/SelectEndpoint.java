@@ -14,7 +14,7 @@ import java.io.IOException;
 @Path("/api/select")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
-public class SelectEndpoint {
+public class SelectEndpoint{
 	/*
 	private static Database database = null;
 

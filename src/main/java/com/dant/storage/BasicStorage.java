@@ -5,11 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.dant.entity.Database;
+import com.dant.entity.*;
 import org.javatuples.*;
-
-import com.dant.entity.Column;
-import com.dant.entity.Table;
 
 public class BasicStorage {
     private static Database db;

@@ -2,9 +2,12 @@ package com.dant.entity;
 
 import com.dant.storage.BasicStorage;
 
-public class Column {
+import java.util.ArrayList;
+
+public class Column{
     private String name;
     private String type;
+    private final ArrayList<Object> data = new ArrayList<Object>();
 
     public Column(String name, String type){
         this.name=name;
@@ -24,7 +27,13 @@ public class Column {
         this.type = type;
     }
 
+    public ArrayList<Object> getData() {
+        return data;
+    }
+
     public void parseValue(String type){
         // TODO
     }
+
+
 }

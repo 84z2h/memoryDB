@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Database {
     private String name;
     private final HashMap<String, Table> tables = new HashMap<>();
@@ -13,7 +14,7 @@ public class Database {
     //private ArrayList<Table> database = new ArrayList<>(); // A ENLEVER
 
     public Database(String name) {this.name = name;}
-    public HashMap<String, Table> getTables() { return tables; }
+    public HashMap<String,Table> getTables() { return tables; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

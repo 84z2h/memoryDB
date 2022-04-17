@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class Table {
+public class Table{
     private String name;
     private final HashMap<String, Column> columns = new HashMap<>();
     // lines : <rowId, <columns_name, value>>
