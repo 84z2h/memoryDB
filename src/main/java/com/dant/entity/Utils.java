@@ -12,7 +12,7 @@ import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Utils{
+public class Utils {
     private static long start_timer;
     private static long stop_timer;
 
@@ -57,7 +57,8 @@ public class Utils{
         while ((s = in.readLine()) != null && i < 2) {
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
-                table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
+                //table.getValues().put(columnsCsv[j], line[j]);
+                table.getLines().put(i, new AbstractMap.SimpleEntry(columnsCsv[j], line[j]));
             }
             //table.getValues().remove(columnsCsv[j]);
             i++;
