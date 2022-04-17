@@ -3,6 +3,7 @@ package com.dant.app;
 import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.Utils;
+import com.dant.storage.BasicStorage;
 import org.javatuples.Triplet;
 
 import javax.ws.rs.*;
@@ -16,11 +17,20 @@ import java.io.IOException;
 public class CreateEndpoint {
 
     @POST
-    @Path("/{name}/{table}")
+    @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Database CreateDB(@PathParam("table") String tableParam, @PathParam("name") String nameDB) throws IOException {
-        //Database  db = database.getTableFromName(tableParam);
-        Database db = new Database(nameDB, tableParam);
+    public Database CreateDB(@PathParam("name") String nameDB) throws IOException {
+        Database db = new Database(nameDB);
+        BasicStorage.setDb(db);
         return db;
+    }
+
+    @POST
+    @Path("/{db}/{table}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
+        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+        Table t=Utils.loadTable(name_table,0);
+        return t;
     }
 }

@@ -3,6 +3,7 @@ package com.dant.app;
 import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.Utils;
+import com.dant.storage.BasicStorage;
 import org.javatuples.Triplet;
 
 import javax.ws.rs.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes({MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
 public class SelectEndpoint {
+	/*
 	private static Database database = null;
 
 	static {
@@ -25,7 +27,7 @@ public class SelectEndpoint {
 	}
 
 	@GET
-	@Path("/*/{table}")
+	@Path("/all/{table}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String helloWorld(@PathParam("table") String tableParam) throws IOException {
 		Table table = database.getTableFromName(tableParam);
@@ -62,4 +64,5 @@ public class SelectEndpoint {
 		throw new RuntimeException("Mon erreur");
 	}
 
+ */
 }

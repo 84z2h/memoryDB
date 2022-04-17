@@ -1,5 +1,7 @@
 package com.dant.entity;
 
+import com.dant.storage.BasicStorage;
+
 public class Column {
     private String name;
     private String type;
@@ -9,9 +11,7 @@ public class Column {
         this.type=type;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
     public String getType() {
         return type;
     }
@@ -24,4 +24,7 @@ public class Column {
         this.type = type;
     }
 
+    public void parseValue(String type){
+        // TODO
+    }
 }

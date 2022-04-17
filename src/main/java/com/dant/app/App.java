@@ -8,9 +8,6 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by pitton on 2017-02-20.
- */
 @ApplicationPath("")
 public class App extends Application {
 
@@ -18,6 +15,8 @@ public class App extends Application {
 	public Set<Object> getSingletons() {
 		Set<Object> sets = new HashSet<>(1);
 		sets.add(new SelectEndpoint());
+		sets.add(new CreateEndpoint());
+		sets.add(new InsertEndpoint());
 		return sets;
 	}
 

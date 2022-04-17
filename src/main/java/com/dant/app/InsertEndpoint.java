@@ -15,11 +15,11 @@ import java.io.IOException;
 public class InsertEndpoint {
 
     @PUT
-    @Path("/{name}/{table}")
+    @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Database CreateDB(@PathParam("table") String tableParam, @PathParam("name") String nameDB) throws IOException {
-        //Database  db = database.getTableFromName(tableParam);
-        Database db = new Database(nameDB, tableParam);
-        return db;
+    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
+        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+        Table t=Utils.loadTable(name_table,1);
+        return t;
     }
 }
