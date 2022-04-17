@@ -13,7 +13,7 @@ public class Database {
     //private ArrayList<Table> database = new ArrayList<>(); // A ENLEVER
 
     public Database(String name) {this.name = name;}
-    public HashMap<String, Table> getTables() { return tables; }
+    public HashMap<String,Table> getTables() { return tables; }
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
