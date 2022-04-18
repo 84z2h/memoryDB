@@ -6,16 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dant.entity.Database;
+import com.dant.entity.Utils;
 import org.javatuples.*;
 
 import com.dant.entity.Column;
 import com.dant.entity.Table;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
+
 public class BasicStorage {
     private static Database db;
-
-    // private Database data; A ENLEVER
-    //private String[][] data; A ENLEVER
 
     /* === Database Storage === */
     public static void setDb(Database db) {BasicStorage.db = db;}
@@ -77,82 +77,35 @@ public class BasicStorage {
         db.getTables().get(name_table).getColumns().remove(name_col);
     }
     /* === Column Storage === */
-/*
-    public BasicStorage(String[][] data) {
-        this.data = data;
-    }
 
-    public String toString() {
+    /* === SQLRequest === */
+    public static String select(String table_name, String columnstab){
+        System.out.println("start select data");
+        Utils.start();
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < data[i].length; j++) {
-                res = res.append(data[i][j]).append(" ");
+        Table t= BasicStorage.getTable(table_name);
+        if(columnstab.equals("*")){ //SELECT ALL
+            int j;
+            for(int i = 0; i < t.getSize();i++) {
+                for (String key: t.getColumns().keySet()) {
+                    res = res.append(t.getColumns().get(key).getData().get(i)).append(" ");
+                }
+                res = res.append("\n");
             }
-            res = res.append("\n");
+        }else {
+            String[] split = columnstab.split(",");
+            int j;
+            for (int i = 0; i < t.getSize(); i++) {
+                for (j = 0; j < split.length; j++) {
+                    res = res.append(t.getColumns().get(split[j]).getData().get(i)).append(" ");
+                }
+                res = res.append("\n");
+            }
         }
+        Utils.pause();
+        System.out.println("Time : " + Utils.getTime()+" ms");
+        System.out.println("end select data");
         return res.toString();
     }
-
-    public String[][] select(String column_name) {
-        String[][] newdata = new String[10000][1];
-        Column[] columns = Table.getColumns();
-        for (int i = 0; i < columns.length; i++) {
-            if (columns[i].getName().equals(column_name)) {
-                System.out.println("COLUMN MATCH");
-                for (int j = 0; j < data.length; j++) {
-                    newdata[j][0] = data[j][i];
-//                    System.out.println(data[j][i]);
-                }
-            }
-        }
-        return newdata;
-    }
-
-    public String[][] select(String[] columnstab) {
-        String[][] newdata = new String[100000][columnstab.length];
-        Column[] columns = Table.getColumns();
-        for (int i = 0; i < columnstab.length; i++) {
-            for (int j = 0; j < columns.length; j++) {
-                if (columns[j].getName().equals(columnstab[i])) {
-                    System.out.println("COLUMN MATCH WITH " + columns[j].getName());
-                    for (int d = 0; d < data.length; d++) {
-                        newdata[d][i] = data[d][j];
-                    }
-                }
-            }
-        }
-        return newdata;
-    }
-
-    public String[][] selecttest(String[] columnstab) {
-        ArrayList<Triplet<String,String,String>> wherelist = new ArrayList<Triplet<String,String,String>>();
-        Triplet<String, String, String> where1 = new Triplet<>("Passenger_count", "=", "1");
-        wherelist.add(where1);
-        String[][] newdata = new String[100][columnstab.length];
-        Column[] columns = Table.getColumns();
-        boolean to_write = true;
-        for (int i = 0; i < columnstab.length; i++) {
-            for (int j = 0; j < columns.length; j++) {
-                if (columns[j].getName().equals(columnstab[i])) {
-                    System.out.println("COLUMN MATCH WITH " + columns[j].getName());
-                    for (int d = 0; d < data.length; d++) {
-                        for(Triplet<String,String,String> where : wherelist){
-                            to_write = true;
-                            if( !(data[d][3]).equals(where.getValue2())){
-                                System.out.println("False");
-                                System.out.println(data[d][3]);
-                                to_write = false;
-                            }
-                        }
-                        if(to_write)
-                            System.out.println("True");
-                            System.out.println(data[d][3]);
-                            newdata[d][i] = data[d][j];
-                    }
-                }
-            }
-        }
-        return newdata;
-    }
- */
+    /* === SQLRequest === */
 }
