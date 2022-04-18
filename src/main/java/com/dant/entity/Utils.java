@@ -16,6 +16,23 @@ public class Utils{
     private static long start_timer;
     private static long stop_timer;
 
+
+    public static String indentifyType(int columnId){
+        String type;
+        switch(columnId){
+            case 0,1,2,7,8,11,14 :
+                type = "String";
+                break;
+            case 3:
+                type = "int";
+                break;
+            default:
+                type = "float";
+                break;
+        }
+        return type;
+    }
+
     /* === CSV Loading... === */
     public static Table loadTable(String csv_filename, int mode) throws IOException {
         // MODE == 0 -> Creation de table
@@ -40,7 +57,8 @@ public class Utils{
         if(mode==0) {
             for (int i = 0; i < columnsCsv.length; i++) {
                 // MANQUE PARSING
-                BasicStorage.setColumn(csv_filename, new Column(columnsCsv[i], "String"));
+                String type = indentifyType(i);
+                BasicStorage.setColumn(csv_filename, new Column(columnsCsv[i], type));
             }
         }
 
@@ -66,6 +84,8 @@ public class Utils{
         // TIMER END
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
+        long freeMemory = Runtime.getRuntime().freeMemory()/10241024;
+        System.out.println("Free space : "+freeMemory);
         System.out.println("end of loading data");
         return table;
     }
