@@ -75,7 +75,8 @@ public class Utils{
         while ((s = in.readLine()) != null && i < 100000) {
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
-                table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
+                //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
+                table.getColumns().get(columnsCsv[j]).getData().add(BasicStorage.getColumn(table.getName(), columnsCsv[j]).optimizeValue(line[j]));
             }
             table.setSize(table.getSize()+1);
             i++;
