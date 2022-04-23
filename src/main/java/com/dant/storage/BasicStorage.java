@@ -105,7 +105,25 @@ public class BasicStorage {
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
         System.out.println("end select data");
+        System.out.println(res.toString());
         return res.toString();
+    }
+
+    public static String select_where(String table_name, String columnstab,String column, String value){
+        String res = BasicStorage.select(table_name, "*");
+        ArrayList<String> columnData = BasicStorage.getColumn(table_name, column).getData();
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for(int i = 0;i<columnData.size();i++){
+            if(columnData.get(i).equals(value)){
+                indexes.add(i);
+            }
+        }
+        StringBuilder newres = new StringBuilder();
+        String[] lines = res.split("\n");
+        for(int i : indexes){
+            newres.append(lines[i]);
+        }
+        return newres.toString();
     }
     /* === SQLRequest === */
 }
