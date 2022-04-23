@@ -20,8 +20,15 @@ public class SelectEndpoint {
     @GET
     @Path("/{table}/{columns}")
     public String select(@PathParam("table") String tableParam,@PathParam("columns") String columns) throws IOException {
-        return BasicStorage.select(tableParam,columns);
+        return BasicStorage.select(tableParam, columns);
     }
+/*
+    @GET
+    @Path("/{table}/{columns}/{where}")
+    public String where(@PathParam("table") String tableParam, @PathParam("columns") String columns, @PathParam("where") String whereclause){
+        return BasicStorage.select_where(tableParam, columns, whereclause);
+    }
+*/
 
     @GET
     @Path("/exception")

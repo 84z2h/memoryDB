@@ -31,17 +31,17 @@ public class Column {
         this.type = type;
     }
 
-    public Object optimizeValue(String s){
+    public String optimizeValue(String s){
         Object o = s;
         switch(type){
             case "float":
                 Float f = Float.parseFloat(s);
-                o = String.format("%.2f",f);
+                s = String.format("%.2f",f);
                 break;
             default:
                 break;
         }
-        return o;
+        return s;
     }
 
 
