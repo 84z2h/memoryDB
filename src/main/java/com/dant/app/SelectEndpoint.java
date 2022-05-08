@@ -25,8 +25,8 @@ public class SelectEndpoint {
 
     @GET
     @Path("/{table}/{columns}/{whereclause}")
-    public String where(@PathParam("table") String tableParam, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
-        return BasicStorage.select_where(tableParam, columns,whereclause);
+    public String where(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
+        return BasicStorage.select_where(table, columns,whereclause);
     }
 
 
