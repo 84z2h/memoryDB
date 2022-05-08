@@ -85,7 +85,6 @@ public class BasicStorage {
         StringBuilder res = new StringBuilder();
         Table t= BasicStorage.getTable(table_name);
         if(columnstab.equals("*")){ //SELECT ALL
-            int j;
             for(int i = 0; i < t.getSize();i++) {
                 for (String key: t.getColumns().keySet()) {
                     res = res.append(t.getColumns().get(key).getData().get(i)).append(" ");
@@ -108,7 +107,7 @@ public class BasicStorage {
         System.out.println(res.toString());
         return res.toString();
     }
-
+/*
     public static String select_where(String table_name, String columnstab,String column, String value){
         String res = BasicStorage.select(table_name, "*");
         ArrayList<String> columnData = BasicStorage.getColumn(table_name, column).getData();
@@ -124,6 +123,25 @@ public class BasicStorage {
             newres.append(lines[i]);
         }
         return newres.toString();
+    }
+    */
+    public static String select_where(String table_name, String column, String whereclause){
+        //path/table/column,column2/column<VTS&&vendor_name=value2
+        System.out.println("start select where data");
+        Utils.start();
+        Table t= BasicStorage.getTable(table_name);
+        StringBuilder res = new StringBuilder();
+
+        ArrayList<String> columnData = BasicStorage.getColumn(table_name, column).getData();
+        String[] split = whereclause.split("||"); //erreur possible
+        // tableau de "column"
+
+
+        Utils.pause();
+        System.out.println("Time : " + Utils.getTime()+" ms");
+        System.out.println("end select data");
+        System.out.println(res.toString());
+        return res.toString();
     }
     /* === SQLRequest === */
 }
