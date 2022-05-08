@@ -131,7 +131,7 @@ public class BasicStorage {
         Utils.start();
         Table t= BasicStorage.getTable(table_name);
         StringBuilder res = new StringBuilder();
-        String[] split = whereclause.split(","); //erreur possible
+        String[] split = whereclause.split("@@");
         // tableau de "column"
         for(long i =0;i<t.getSize();i++){
             boolean clause = false;
