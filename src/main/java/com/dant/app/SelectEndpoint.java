@@ -22,13 +22,13 @@ public class SelectEndpoint {
     public String select(@PathParam("table") String tableParam,@PathParam("columns") String columns) throws IOException {
         return BasicStorage.select(tableParam, columns);
     }
-/*
+
     @GET
-    @Path("/{table}/{columns}/{where}")
-    public String where(@PathParam("table") String tableParam, @PathParam("columns") String columns, @PathParam("where") String whereclause){
-        return BasicStorage.select_where(tableParam, columns, whereclause);
+    @Path("/{table}/{columns}/{wherecolumn}/{wherevalue}")
+    public String where(@PathParam("table") String tableParam, @PathParam("columns") String columns, @PathParam("wherecolumn") String wherecolumn,@PathParam("wherevalue") String wherevalue){
+        return BasicStorage.select_where(tableParam, columns,wherevalue);
     }
-*/
+
 
     @GET
     @Path("/exception")

@@ -125,18 +125,70 @@ public class BasicStorage {
         return newres.toString();
     }
     */
-    public static String select_where(String table_name, String column, String whereclause){
+    public static String select_where(String table_name, String columns, String whereclause){
         //path/table/column,column2/column<VTS&&vendor_name=value2
         System.out.println("start select where data");
         Utils.start();
         Table t= BasicStorage.getTable(table_name);
         StringBuilder res = new StringBuilder();
-
-        ArrayList<String> columnData = BasicStorage.getColumn(table_name, column).getData();
         String[] split = whereclause.split("||"); //erreur possible
         // tableau de "column"
+        for(long i =0;i<t.getSize();i++){
+            boolean clause = false;
+            int j = 0;
+            while(clause==false || j<split.length){
+                String[] and = split[j].split("&&");
+                int cpt=0;
+                for(String subclause : and){
+                    if(subclause.contains("=")){
+                        String[] cond = subclause.split("=");
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains("<")){
+                        String[] cond = subclause.split("<");
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains(">")){
+                        String[] cond = subclause.split(">");
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains("<=")){
+                        String[] cond = subclause.split("<=");
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains(">=")){
+                        String[] cond = subclause.split(">=");
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else{
+                        System.out.println("Erreur de syntaxe !");
+                        return "ERROR";
+                    }
+                }
+                if(cpt==and.length){
+                    for(String col: columns.split(",")) {
+                        res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i));
+                    }
+                    clause = true;
+                }
+            }
 
-
+        }
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
         System.out.println("end select data");
