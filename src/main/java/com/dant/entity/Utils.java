@@ -72,7 +72,7 @@ public class Utils{
         Long i= Long.valueOf(0);
         int j;
         // load lines
-        while ((s = in.readLine()) != null && i < 1000000) {
+        while ((s = in.readLine()) != null && i < 100000) {
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
                 //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
