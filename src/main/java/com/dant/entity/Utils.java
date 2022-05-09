@@ -78,10 +78,9 @@ public class Utils{
                 List<String> row = column.getData();
                 row.add(column.optimizeValue(line[j]));
             }
-            table.setSize(table.getSize()+1);
             i++;
         }
-
+        table.setSize(table.getSize()+i);
         // TIMER END
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
