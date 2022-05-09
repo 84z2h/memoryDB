@@ -8,7 +8,7 @@ import java.lang.Math;
 public class Column {
     private String name;
     private String type;
-    private final ArrayList<Object> data= new ArrayList<Object>();
+    private final transient ArrayList<Object> data= new ArrayList<Object>();
 
     public Column(String name, String type){
         this.name=name;

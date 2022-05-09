@@ -26,9 +26,9 @@ public class CreateEndpoint {
     }
 
     @POST
-    @Path("/{db}/{table}/{columns}")
+    @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table, @PathParam("columns") String columns) throws IOException {
+    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table, Table table) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
         Table t=Utils.createTable(name_table);
         return t;
