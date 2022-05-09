@@ -8,9 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.FileStore;
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class Utils{
     private static long start_timer;
@@ -69,14 +67,16 @@ public class Utils{
             return table;
         }
         s = in.readLine();
-        Long i= Long.valueOf(0);
+        long i = 0;
         int j;
         // load lines
-        while ((s = in.readLine()) != null && i < 10) {
+        while ((s = in.readLine()) != null && i < 1000000) {
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
                 //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
-                table.getColumns().get(columnsCsv[j]).getData().add(BasicStorage.getColumn(table.getName(), columnsCsv[j]).optimizeValue(line[j]));
+                Column column = table.getColumns().get(columnsCsv[j]);
+                List<String> row = column.getData();
+                row.add(column.optimizeValue(line[j]));
             }
             table.setSize(table.getSize()+1);
             i++;
@@ -85,8 +85,6 @@ public class Utils{
         // TIMER END
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
-        long freeMemory = Runtime.getRuntime().freeMemory()/10241024;
-        System.out.println("Free space : "+freeMemory);
         System.out.println("end of loading data");
         return table;
     }

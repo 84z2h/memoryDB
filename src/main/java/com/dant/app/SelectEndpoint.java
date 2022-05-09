@@ -1,6 +1,7 @@
 package com.dant.app;
 
 import com.dant.entity.Database;
+import com.dant.entity.ResultSet;
 import com.dant.entity.Table;
 import com.dant.entity.Utils;
 import com.dant.storage.BasicStorage;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Path("/api/select")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes({MediaType.APPLICATION_JSON, MediaType.MULTIPART_FORM_DATA})
+@Consumes({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN, MediaType.MULTIPART_FORM_DATA})
 public class SelectEndpoint {
 
     @GET
@@ -28,7 +29,13 @@ public class SelectEndpoint {
     public String where(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
         return BasicStorage.select_where(table, columns,whereclause);
     }
-
+/*
+    @GET
+    @Path("/{table}/{columns}/{whereclause}")
+    public ResultSet whereJson(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
+        return BasicStorage.select_where(table, columns,whereclause);
+    }
+*/
 
     @GET
     @Path("/exception")

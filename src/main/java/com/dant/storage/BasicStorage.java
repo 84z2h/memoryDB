@@ -83,7 +83,7 @@ public class BasicStorage {
         System.out.println("start select data");
         Utils.start();
         StringBuilder res = new StringBuilder();
-        Table t= BasicStorage.getTable(table_name);
+        Table t = BasicStorage.getTable(table_name);
         if(columnstab.equals("*")){ //SELECT ALL
             for(int i = 0; i < t.getSize();i++) {
                 for (String key: t.getColumns().keySet()) {
@@ -107,24 +107,7 @@ public class BasicStorage {
         System.out.println(res.toString());
         return res.toString();
     }
-/*
-    public static String select_where(String table_name, String columnstab,String column, String value){
-        String res = BasicStorage.select(table_name, "*");
-        ArrayList<String> columnData = BasicStorage.getColumn(table_name, column).getData();
-        ArrayList<Integer> indexes = new ArrayList<>();
-        for(int i = 0;i<columnData.size();i++){
-            if(columnData.get(i).equals(value)){
-                indexes.add(i);
-            }
-        }
-        StringBuilder newres = new StringBuilder();
-        String[] lines = res.split("\n");
-        for(int i : indexes){
-            newres.append(lines[i]);
-        }
-        return newres.toString();
-    }
-    */
+
     public static String select_where(String table_name, String columns, String whereclause){
         //path/table/column,column2/column<VTS&&vendor_name=value2
         System.out.println("start select where data");
