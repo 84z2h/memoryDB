@@ -32,7 +32,29 @@ public class Utils{
     }
 
     /* === CSV Loading... === */
-    public static Table loadTable(String csv_filename, int mode) throws IOException {
+    public static Table createTable(String csv_filename) throws IOException {
+        System.out.println("start loading data");
+        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
+        String s = null;
+        // TIMER START
+        Utils.start();
+        s = in.readLine();
+        String[] columnsCsv = s.split(",");
+        // Create Table
+        Table table;
+        table = new Table(csv_filename);
+        BasicStorage.setTable(table);
+        for (int i = 0; i < columnsCsv.length; i++) {
+            // MANQUE PARSING
+            String type = indentifyType(i);
+            BasicStorage.setColumn(csv_filename, new Column(columnsCsv[i], type));
+        }
+        Utils.pause();
+        System.out.println("Time : " + Utils.getTime()+" ms");
+        System.out.println("end of loading columns");
+        return table;
+    }
+    public static Table insertTable(String csv_filename) throws IOException {
         // MODE == 0 -> Creation de table
         System.out.println("start loading data");
         BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
@@ -43,29 +65,8 @@ public class Utils{
         s = in.readLine();
         String[] columnsCsv = s.split(",");
         // Create Table
-        Table table;
-        if(mode==0) {
-            table = new Table(csv_filename);
-            BasicStorage.setTable(table);
-        }else{
-            table = BasicStorage.getTable(csv_filename);
-        }
-
+        Table table = BasicStorage.getTable(csv_filename);
         // add columns to table
-        if(mode==0) {
-            for (int i = 0; i < columnsCsv.length; i++) {
-                // MANQUE PARSING
-                String type = indentifyType(i);
-                BasicStorage.setColumn(csv_filename, new Column(columnsCsv[i], type));
-            }
-        }
-
-        if (mode == 0) {
-            Utils.pause();
-            System.out.println("Time : " + Utils.getTime()+" ms");
-            System.out.println("end of loading columns");
-            return table;
-        }
         s = in.readLine();
         long i = 0;
         int j;
@@ -75,13 +76,12 @@ public class Utils{
             for(j = 0; j < columnsCsv.length;  j++) {
                 //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
                 Column column = table.getColumns().get(columnsCsv[j]);
-                List<String> row = column.getData();
+                List<Object> row = column.getData();
                 row.add(column.optimizeValue(line[j]));
             }
-            table.setSize(table.getSize()+1);
             i++;
         }
-
+        table.setSize(table.getSize()+i);
         // TIMER END
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");

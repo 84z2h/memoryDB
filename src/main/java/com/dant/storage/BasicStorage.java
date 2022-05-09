@@ -125,35 +125,35 @@ public class BasicStorage {
                 for(String subclause : and){
                     if(subclause.contains("=")){
                         String[] cond = subclause.split("=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains("<")){
                         String[] cond = subclause.split("<");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains(">")){
                         String[] cond = subclause.split(">");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains("<=")){
                         String[] cond = subclause.split("<=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains(">=")){
                         String[] cond = subclause.split(">=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
                         if(value.equals(cond[1])){
                             cpt++;
                         }

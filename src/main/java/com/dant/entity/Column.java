@@ -8,7 +8,7 @@ import java.lang.Math;
 public class Column {
     private String name;
     private String type;
-    private final ArrayList<String> data= new ArrayList<String>();
+    private final ArrayList<Object> data= new ArrayList<Object>();
 
     public Column(String name, String type){
         this.name=name;
@@ -23,7 +23,7 @@ public class Column {
     public void setName(String name) {
         this.name = name;
     }
-    public ArrayList<String> getData(){
+    public ArrayList<Object> getData(){
         return data;
     }
 

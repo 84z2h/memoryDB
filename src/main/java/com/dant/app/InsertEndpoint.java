@@ -21,7 +21,7 @@ public class InsertEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        Table t=Utils.loadTable(name_table,1);
+        Table t=Utils.insertTable(name_table);
         return t;
     }
 }
