@@ -35,13 +35,13 @@ public class SelectEndpoint {
     public String where(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
         return BasicStorage.select_where(table, columns,whereclause);
     }
-
+/*
     @GET
     @Path("/{table}/{columns}/{whereclause}")
     public ResultSet whereJson(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
         return null;
     }
-
+*/
     @GET
     @Path("/exception")
     public Response exception() {
