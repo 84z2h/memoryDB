@@ -176,7 +176,6 @@ public class BasicStorage {
         Utils.pause();
         System.out.println("Time : " + Utils.getTime()+" ms");
         System.out.println("end select data");
-        System.out.println(res.toString());
         return res.toString();
     }
     /* === SQLRequest === */
