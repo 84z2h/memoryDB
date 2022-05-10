@@ -49,7 +49,7 @@ public class CSVLoading {
         return table;
     }
 
-    public static Table insertTable(String csv_filename) throws IOException {
+    public static String insertTable(String csv_filename) throws IOException {
         // MODE == 0 -> Creation de table
         System.out.println("start loading data");
         BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
@@ -83,8 +83,9 @@ public class CSVLoading {
         table.setSize(table.getSize()+i);
         // TIMER END
         TimerManage.pause();
-        System.out.println("Time : " + TimerManage.getTime()+" ms");
-        System.out.println("end of loading data");
-        return table;
+        String Time = "Elapsed Time : " + TimerManage.getTime()+" ms\n";
+        Time += "Lines inserted : " + i;
+        System.out.println(Time);
+        return Time;
     }
 }

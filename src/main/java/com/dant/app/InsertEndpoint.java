@@ -19,9 +19,9 @@ public class InsertEndpoint {
     @PUT
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
+    public String CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        Table t=CSVLoading.insertTable(name_table);
-        return t;
+        return CSVLoading.insertTable(name_table);
+
     }
 }

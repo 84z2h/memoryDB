@@ -1,5 +1,15 @@
 com\dant\app\CreateEndpoint.class
 com\dant\entity\Database.class
+com\dant\entity\Column.class
+com\dant\entity\Table.class
+com\dant\storage\Storage.class
+com\dant\app\SelectEndpoint.class
+Main.class
+com\dant\exception\RuntimeExceptionMapper.class
+com\dant\app\App.class
+com\dant\storage\BasicStorage.class
 com\dant\entity\ResultSet.class
 com\dant\entity\TimerManage.class
 com\dant\entity\CSVLoading.class
+com\dant\app\InsertEndpoint.class
+com\dant\filter\GsonProvider.class
