@@ -110,9 +110,10 @@ public class BasicStorage {
         ResultSet result = new ResultSet();
         Table t = BasicStorage.getTable(table_name);
         if(columnstab.equals("*")){ //SELECT ALL
-            int j=0;
-            String[] line = new String[t.getColumns().size()];
+            int j;
+            String[] line = new String[t.getColumns().keySet().size()];
             for(int i = 0; i < t.getSize();i++) {
+                j=0;
                 for (String key: t.getColumns().keySet()) {
                     line[j] = (String) t.getColumns().get(key).getData().get(i);
                     j++;
