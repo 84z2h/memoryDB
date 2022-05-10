@@ -1,3 +1,5 @@
 com\dant\app\CreateEndpoint.class
 com\dant\entity\Database.class
 com\dant\entity\ResultSet.class
+com\dant\entity\TimerManage.class
+com\dant\entity\CSVLoading.class

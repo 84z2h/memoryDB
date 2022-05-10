@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dant.entity.Database;
-import com.dant.entity.Utils;
+import com.dant.entity.TimerManage;
+import com.dant.entity.CSVLoading;
 import org.javatuples.*;
 
 import com.dant.entity.Column;
@@ -81,7 +82,7 @@ public class BasicStorage {
     /* === SQLRequest === */
     public static String select(String table_name, String columnstab){
         System.out.println("start select data");
-        Utils.start();
+        TimerManage.start();
         StringBuilder res = new StringBuilder();
         Table t = BasicStorage.getTable(table_name);
         if(columnstab.equals("*")){ //SELECT ALL
@@ -101,8 +102,8 @@ public class BasicStorage {
                 res = res.append("\n");
             }
         }
-        Utils.pause();
-        System.out.println("Time : " + Utils.getTime()+" ms");
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
         System.out.println("end select data");
         return res.toString();
     }
@@ -110,7 +111,7 @@ public class BasicStorage {
     public static String select_where(String table_name, String columns, String whereclause){
         //path/table/column,column2/column<VTS&&vendor_name=value2
         System.out.println("start select where data");
-        Utils.start();
+        TimerManage.start();
         Table t= BasicStorage.getTable(table_name);
         StringBuilder res = new StringBuilder();
         String[] split = whereclause.split("@@");
@@ -171,8 +172,8 @@ public class BasicStorage {
                 j++;
             }
         }
-        Utils.pause();
-        System.out.println("Time : " + Utils.getTime()+" ms");
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
         System.out.println("end select data");
         return res.toString();
     }

@@ -2,7 +2,7 @@ package com.dant.app;
 
 import com.dant.entity.Database;
 import com.dant.entity.Table;
-import com.dant.entity.Utils;
+import com.dant.entity.CSVLoading;
 import com.dant.storage.BasicStorage;
 import org.javatuples.Triplet;
 
@@ -30,7 +30,7 @@ public class CreateEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        Table table =Utils.createTable(name_table);
+        Table table =CSVLoading.createTable(name_table);
         return table;
     }
 
