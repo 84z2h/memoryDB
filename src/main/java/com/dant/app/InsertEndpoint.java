@@ -17,11 +17,11 @@ import java.io.InputStream;
 public class InsertEndpoint {
 
     @PUT
-    @Path("/{db}/{table}")
+    @Path("/{db}/{table}/{limit}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
+    public String CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,@PathParam("limit") int max_size) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        return CSVLoading.insertTable(name_table);
+        return CSVLoading.insertTable(name_table, max_size);
 
     }
 }

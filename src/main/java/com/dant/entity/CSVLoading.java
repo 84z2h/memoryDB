@@ -49,7 +49,7 @@ public class CSVLoading {
         return table;
     }
 
-    public static String insertTable(String csv_filename) throws IOException {
+    public static String insertTable(String csv_filename, int max_size) throws IOException {
         // MODE == 0 -> Creation de table
         System.out.println("start loading data");
         BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
@@ -66,7 +66,7 @@ public class CSVLoading {
         long i = 0;
         int j;
         // load lines
-        while ((s = in.readLine()) != null && i < 1000000) {
+        while ((s = in.readLine()) != null && i < max_size) {
             if(i % 100000 == 0){
                 System.out.println(i + " lines inserted");
             }
