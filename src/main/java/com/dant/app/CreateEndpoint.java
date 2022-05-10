@@ -28,9 +28,17 @@ public class CreateEndpoint {
     @POST
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table, Table table) throws IOException {
+    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        Table t=Utils.createTable(name_table);
-        return t;
+        Table table =Utils.createTable(name_table);
+        return table;
+    }
+
+    @POST
+    @Path("/{db}/{table}/json")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Table CreateTableWithJson(@PathParam("db") String nameDB, @PathParam("table") String name_table, Table table) throws IOException {
+        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+        return table;
     }
 }
