@@ -5,15 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.dant.entity.Database;
-import com.dant.entity.TimerManage;
-import com.dant.entity.CSVLoading;
+import com.dant.entity.*;
 import org.javatuples.*;
 
-import com.dant.entity.Column;
-import com.dant.entity.Table;
-
 import javax.swing.plaf.synth.SynthTextAreaUI;
+import javax.xml.transform.Result;
 
 public class BasicStorage {
     private static Database db;
@@ -108,8 +104,39 @@ public class BasicStorage {
         return res.toString();
     }
 
+    public static ResultSet selectJson(String table_name, String columnstab){
+        System.out.println("start select data");
+        TimerManage.start();
+        ResultSet result = new ResultSet();
+        Table t = BasicStorage.getTable(table_name);
+        if(columnstab.equals("*")){ //SELECT ALL
+            int j=0;
+            String[] line = new String[t.getColumns().size()];
+            for(int i = 0; i < t.getSize();i++) {
+                for (String key: t.getColumns().keySet()) {
+                    line[j] = (String) t.getColumns().get(key).getData().get(i);
+                    j++;
+                }
+                result.addString(line);
+            }
+        }else {
+            String[] split = columnstab.split(",");
+            int j;
+            String[] line = new String[split.length];
+            for (int i = 0; i < t.getSize(); i++) {
+                for (j = 0; j < split.length; j++) {
+                    line[j] = (String) t.getColumns().get(split[j]).getData().get(i);
+                }
+                result.addString(line);
+            }
+        }
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
+        System.out.println("end select data");
+        return result;
+    }
+
     public static String select_where(String table_name, String columns, String whereclause){
-        //path/table/column,column2/column<VTS&&vendor_name=value2
         System.out.println("start select where data");
         TimerManage.start();
         Table t= BasicStorage.getTable(table_name);
@@ -165,8 +192,9 @@ public class BasicStorage {
                 }
                 if(cpt==and.length){
                     for(String col: columns.split(",")) {
-                        res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i));
+                        res = res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i)).append(" ");
                     }
+                    res = res.append("\n");
                     clause = true;
                 }
                 j++;
@@ -176,6 +204,78 @@ public class BasicStorage {
         System.out.println("Time : " + TimerManage.getTime()+" ms");
         System.out.println("end select data");
         return res.toString();
+    }
+
+    public static ResultSet select_whereJson(String table_name, String columns, String whereclause){
+        System.out.println("start select where data");
+        TimerManage.start();
+        Table t= BasicStorage.getTable(table_name);
+        //StringBuilder res = new StringBuilder();
+        ResultSet result = new ResultSet();
+        String[] split = whereclause.split("@@");
+        // tableau de "column"
+        for(long i =0;i<t.getSize();i++){
+            boolean clause = false;
+            int j = 0;
+            while(clause==false && j<split.length){
+                String[] and = split[j].split("&&");
+                int cpt=0;
+                for(String subclause : and){
+                    if(subclause.contains("=")){
+                        String[] cond = subclause.split("=");
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains("<")){
+                        String[] cond = subclause.split("<");
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains(">")){
+                        String[] cond = subclause.split(">");
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains("<=")){
+                        String[] cond = subclause.split("<=");
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                    else if(subclause.contains(">=")){
+                        String[] cond = subclause.split(">=");
+                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        if(value.equals(cond[1])){
+                            cpt++;
+                        }
+                    }
+                }
+                if(cpt==and.length){
+                    String[] cols = columns.split(",");
+                    String[] line = new String[cols.length];
+                    int k=0;
+                    for(String col: cols) {
+                        //res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i));
+                        line[k] = (String) BasicStorage.getColumn(table_name, col).getData().get((int) i);
+                        k++;
+                    }
+                    result.addString(line);
+                    clause = true;
+                }
+                j++;
+            }
+        }
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
+        System.out.println("end select data");
+        return result;
     }
     /* === SQLRequest === */
 
