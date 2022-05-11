@@ -19,8 +19,8 @@ public class InsertEndpoint {
     @PUT
     @Path("/{db}/{table}/{limit}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,@PathParam("limit") int max_size) throws IOException {
-        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+    public String createTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,@PathParam("limit") int max_size) throws IOException {
+        //if(!BasicStorage.getDb().getName().equals(nameDB)){ return null; }
         return CSVLoading.insertTable(name_table, max_size);
 
     }

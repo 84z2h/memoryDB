@@ -1,6 +1,7 @@
 package com.dant.entity;
 
 import com.dant.storage.BasicStorage;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.lang.Math;
@@ -8,7 +9,7 @@ import java.lang.Math;
 public class Column {
     private String name;
     private String type;
-    private final transient ArrayList<Object> data= new ArrayList<Object>();
+    private final ArrayList<Object> data = new ArrayList<>();
 
     public Column(String name, String type){
         this.name=name;
@@ -29,6 +30,11 @@ public class Column {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String toString(){
+        String s = name+" "+type+" "+data.size();
+        return s;
     }
 
     public String optimizeValue(String s){

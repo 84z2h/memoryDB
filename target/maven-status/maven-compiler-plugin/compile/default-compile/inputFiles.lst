@@ -11,5 +11,7 @@ X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\storage\Storage.java
 X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\app\InsertEndpoint.java
 X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\filter\GsonProvider.java
 X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\entity\Table.java
+X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\entity\dto\TableDTO.java
+X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\entity\dto\ColumnDTO.java
 X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\entity\TimerManage.java
 X:\LU2IN\LU3IN107\memoryDB\src\main\java\com\dant\exception\RuntimeExceptionMapper.java

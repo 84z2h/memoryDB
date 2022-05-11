@@ -11,5 +11,7 @@ com\dant\storage\BasicStorage.class
 com\dant\entity\ResultSet.class
 com\dant\entity\TimerManage.class
 com\dant\entity\CSVLoading.class
+com\dant\entity\dto\ColumnDTO.class
 com\dant\app\InsertEndpoint.class
+com\dant\entity\dto\TableDTO.class
 com\dant\filter\GsonProvider.class

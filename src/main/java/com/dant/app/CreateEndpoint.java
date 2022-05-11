@@ -3,6 +3,7 @@ package com.dant.app;
 import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.CSVLoading;
+import com.dant.entity.dto.TableDTO;
 import com.dant.storage.BasicStorage;
 import org.javatuples.Triplet;
 
@@ -19,7 +20,7 @@ public class CreateEndpoint {
     @POST
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Database CreateDB(@PathParam("name") String nameDB) throws IOException {
+    public Database createDB(@PathParam("name") String nameDB) throws IOException {
         Database db = new Database(nameDB);
         BasicStorage.setDb(db);
         return db;
@@ -28,17 +29,19 @@ public class CreateEndpoint {
     @POST
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Table CreateTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
-        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+    public Table createTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         Table table =CSVLoading.createTable(name_table);
         return table;
     }
 
     @POST
-    @Path("/{db}/{{table}}")
+    @Path("/{db}/json")
     @Produces(MediaType.APPLICATION_JSON)
-    public Table CreateTableWithJson(@PathParam("db") String nameDB, @PathParam("table") String name_table, Table table) throws IOException {
-        if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        return table;
+    public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
+        Table table = tableDto.toTable();
+        Database db = new Database(nameDB);
+        db.getTables().put(table.getName(),table);
+        BasicStorage.setDb(db);
+        return tableDto;
     }
 }

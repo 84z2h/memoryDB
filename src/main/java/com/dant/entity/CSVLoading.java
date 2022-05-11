@@ -5,6 +5,7 @@ import com.dant.storage.BasicStorage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -74,7 +75,7 @@ public class CSVLoading {
             for(j = 0; j < columnsCsv.length;  j++) {
                 //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
                 Column column = table.getColumns().get(columnsCsv[j]);
-                List<Object> row = column.getData();
+                ArrayList<Object> row = column.getData();
                 row.add(column.optimizeValue(line[j]));
             }
             i++;
