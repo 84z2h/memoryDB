@@ -37,16 +37,15 @@ public class Column {
         return s;
     }
 
-    public String optimizeValue(String s){
-        Object o = s;
+    public Object optimizeValue(String s){
         switch(type){
             case "float":
-                Float f = Float.parseFloat(s);
+                float f = Float.parseFloat(s);
                 s = String.format("%.2f",f);
-                break;
+                f = Float.valueOf(s.replace(',','.'));
+                return f;
             default:
-                break;
+                return s;
         }
-        return s;
     }
 }
