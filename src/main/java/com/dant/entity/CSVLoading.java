@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.*;
+import java.sql.SQLOutput;
 import java.util.List;
 
 
@@ -47,13 +49,14 @@ public class CSVLoading {
         TimerManage.pause();
         System.out.println("Time : " + TimerManage.getTime()+" ms");
         System.out.println("end of loading columns");
+        in.close();
         return table;
     }
 
-    public static String insertTable(String csv_filename, int max_size) throws IOException {
+    public static String insertTable(String csv_filename, int max_size, InputStream input) throws IOException {
         // MODE == 0 -> Creation de table
         System.out.println("start loading data");
-        BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
+        BufferedReader in = new BufferedReader(new InputStreamReader(input));
         String s = null;
         // TIMER START
         TimerManage.start();
@@ -73,7 +76,6 @@ public class CSVLoading {
             }
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
-                //table.getColumns().get(columnsCsv[j]).getData().add(line[j]);
                 Column column = table.getColumns().get(columnsCsv[j]);
                 ArrayList<Object> row = column.getData();
                 row.add(column.optimizeValue(line[j]));
@@ -87,6 +89,7 @@ public class CSVLoading {
         String Time = "Elapsed Time : " + TimerManage.getTime()+" ms\n";
         Time += "Lines inserted : " + i;
         System.out.println(Time);
+        in.close();
         return Time;
     }
 }
