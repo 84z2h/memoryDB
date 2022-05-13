@@ -48,10 +48,14 @@ public class Column {
                 s = String.format("%.2f",f);
                 f = Float.valueOf(s.replace(',','.'));
                 return f;
+            case "byte":
+            case "short":
             case "int":
+            case "long":
                 int i = Integer.parseInt(s);
-                if (abs(i) < 10) {
-                    return s;
+                if (abs(i) < 126) {
+                    Byte b = Byte.parseByte(s);
+                    return b;
                 }
                 else if (abs(i)<32766){
                     short sh = Short.parseShort(s);

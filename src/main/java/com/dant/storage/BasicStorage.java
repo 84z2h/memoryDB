@@ -115,7 +115,7 @@ public class BasicStorage {
             for(int i = 0; i < t.getSize();i++) {
                 j=0;
                 for (String key: t.getColumns().keySet()) {
-                    line[j] = (String) t.getColumns().get(key).getData().get(i);
+                    line[j] = t.getColumns().get(key).getData().get(i).toString();
                     j++;
                 }
                 result.addString(line);
@@ -126,7 +126,7 @@ public class BasicStorage {
             String[] line = new String[split.length];
             for (int i = 0; i < t.getSize(); i++) {
                 for (j = 0; j < split.length; j++) {
-                    line[j] = (String) t.getColumns().get(split[j]).getData().get(i);
+                    line[j] = t.getColumns().get(split[j]).getData().get(i).toString();
                 }
                 result.addString(line);
             }
