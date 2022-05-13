@@ -5,6 +5,9 @@ import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.lang.Math;
+import java.util.Locale;
+
+import static java.lang.Math.abs;
 
 public class Column {
     private String name;
@@ -39,13 +42,33 @@ public class Column {
 
     public Object optimizeValue(String s){
         switch(type){
+            case "double":
             case "float":
                 float f = Float.parseFloat(s);
                 s = String.format("%.2f",f);
                 f = Float.valueOf(s.replace(',','.'));
                 return f;
+            case "int":
+                int i = Integer.parseInt(s);
+                if (abs(i) < 10) {
+                    return s;
+                }
+                else if (abs(i)<32766){
+                    short sh = Short.parseShort(s);
+                    return sh;
+                }
+                else if (abs(i)<2147483646){
+                    return i;
+                }
+                else{
+                    long l = Long.parseLong(s);
+                    return l;
+                }
+            case "boolean":
+                boolean b = Boolean.parseBoolean(s);
+                return b;
             default:
-                return s;
+                return s.toLowerCase();
         }
     }
 }
