@@ -70,14 +70,16 @@ public class CSVLoading {
         long i = 0;
         int j;
         // load lines
+        Column column;
+        ArrayList<Object> row;
         while ((s = in.readLine()) != null && i < max_size) {
             if(i % 100000 == 0){
                 System.out.println(i + " lines inserted");
             }
             String[] line = s.split(",");
             for(j = 0; j < columnsCsv.length;  j++) {
-                Column column = table.getColumns().get(columnsCsv[j]);
-                ArrayList<Object> row = column.getData();
+                column = table.getColumns().get(columnsCsv[j]);
+                row = column.getData();
                 row.add(column.optimizeValue(line[j]));
             }
             i++;

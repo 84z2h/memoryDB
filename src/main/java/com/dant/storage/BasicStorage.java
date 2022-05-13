@@ -76,34 +76,6 @@ public class BasicStorage {
     /* === Column Storage === */
 
     /* === SQLRequest === */
-    public static String select(String table_name, String columnstab){
-        System.out.println("start select data");
-        TimerManage.start();
-        StringBuilder res = new StringBuilder();
-        Table t = BasicStorage.getTable(table_name);
-        if(columnstab.equals("*")){ //SELECT ALL
-            for(int i = 0; i < t.getSize();i++) {
-                for (String key: t.getColumns().keySet()) {
-                    res = res.append(t.getColumns().get(key).getData().get(i)).append(" ");
-                }
-                res = res.append("\n");
-            }
-        }else {
-            String[] split = columnstab.split(",");
-            int j;
-            for (int i = 0; i < t.getSize(); i++) {
-                for (j = 0; j < split.length; j++) {
-                    res = res.append(t.getColumns().get(split[j]).getData().get(i)).append(" ");
-                }
-                res = res.append("\n");
-            }
-        }
-        TimerManage.pause();
-        System.out.println("Time : " + TimerManage.getTime()+" ms");
-        System.out.println("end select data");
-        return res.toString();
-    }
-
     public static ResultSet selectJson(String table_name, String columnstab){
         System.out.println("start select data");
         TimerManage.start();
@@ -135,76 +107,6 @@ public class BasicStorage {
         System.out.println("Time : " + TimerManage.getTime()+" ms");
         System.out.println("end select data");
         return result;
-    }
-
-    public static String select_where(String table_name, String columns, String whereclause){
-        System.out.println("start select where data");
-        TimerManage.start();
-        Table t= BasicStorage.getTable(table_name);
-        StringBuilder res = new StringBuilder();
-        String[] split = whereclause.split("@@");
-        // tableau de "column"
-        for(long i =0;i<t.getSize();i++){
-            boolean clause = false;
-            int j = 0;
-            while(clause==false && j<split.length){
-                String[] and = split[j].split("&&");
-                int cpt=0;
-                for(String subclause : and){
-                    if(subclause.contains("=")){
-                        String[] cond = subclause.split("=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains("<")){
-                        String[] cond = subclause.split("<");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains(">")){
-                        String[] cond = subclause.split(">");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains("<=")){
-                        String[] cond = subclause.split("<=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains(">=")){
-                        String[] cond = subclause.split(">=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else{
-                        System.out.println("Erreur de syntaxe !");
-                        return "ERROR";
-                    }
-                }
-                if(cpt==and.length){
-                    for(String col: columns.split(",")) {
-                        res = res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i)).append(" ");
-                    }
-                    res = res.append("\n");
-                    clause = true;
-                }
-                j++;
-            }
-        }
-        TimerManage.pause();
-        System.out.println("Time : " + TimerManage.getTime()+" ms");
-        System.out.println("end select data");
-        return res.toString();
     }
 
     public static ResultSet select_whereJson(String table_name, String columns, String whereclause){
