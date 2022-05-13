@@ -29,5 +29,4 @@ public class SelectEndpoint {
     public Response exception() {
         throw new RuntimeException("Mon erreur");
     }
-
 }
