@@ -1,6 +1,6 @@
 package com.dant.entity.dto;
 
-import com.dant.entity.Column;
+import com.dant.entity.columns.Column;
 
 import java.io.Serializable;
 

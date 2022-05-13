@@ -1,15 +1,7 @@
 package com.dant.storage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import com.dant.entity.*;
-import org.javatuples.*;
-
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import javax.xml.transform.Result;
+import com.dant.entity.columns.Column;
 
 public class BasicStorage {
     private static Database db;

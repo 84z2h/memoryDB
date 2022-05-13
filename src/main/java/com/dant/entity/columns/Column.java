@@ -1,4 +1,4 @@
-package com.dant.entity;
+package com.dant.entity.columns;
 
 import com.dant.storage.BasicStorage;
 import com.google.gson.annotations.Expose;
@@ -10,8 +10,8 @@ import java.util.Locale;
 import static java.lang.Math.abs;
 
 public class Column {
-    private String name;
-    private String type;
+    protected String name;
+    protected String type;
     private final ArrayList<Object> data = new ArrayList<>();
 
     public Column(String name, String type){

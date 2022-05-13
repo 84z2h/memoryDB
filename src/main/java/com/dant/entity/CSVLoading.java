@@ -1,5 +1,6 @@
 package com.dant.entity;
 
+import com.dant.entity.columns.Column;
 import com.dant.storage.BasicStorage;
 
 import java.io.BufferedReader;
@@ -7,8 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.*;
-import java.sql.SQLOutput;
-import java.util.List;
 
 
 public class CSVLoading {

@@ -1,6 +1,6 @@
 package com.dant.entity;
 
-import com.dant.storage.BasicStorage;
+import com.dant.entity.columns.Column;
 
 import java.util.*;
 
