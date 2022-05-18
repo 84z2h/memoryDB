@@ -59,10 +59,9 @@ public class CSVLoading {
         String s = null;
         // TIMER START
         TimerManage.start();
-
         s = in.readLine();
         String[] columnsCsv = s.split(",");
-        // Create Table
+        // Get Table
         Table table = BasicStorage.getTable(csv_filename);
         // add columns to table
         s = in.readLine();
