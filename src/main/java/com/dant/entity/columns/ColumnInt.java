@@ -1,16 +1,35 @@
 package com.dant.entity.columns;
 
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntListIterator;
+
 
 public class ColumnInt extends Column{
-    private ArrayList<String> dataString = new ArrayList<>();
 
-    public ColumnInt(String name, String type){
-        super(name, type);
+    private IntArrayList dataInt = new IntArrayList();
+
+    public ColumnInt(String name){
+        super(name, "int");
     }
 
-    public ArrayList<String> getDataString(){
-        return dataString;
+    public void add(int i){
+        dataInt.add(i);
+    }
+
+    public int get(int index){
+        return dataInt.getInt(index);
+    }
+
+    public int size(){
+        return dataInt.size();
+    }
+
+    public IntArrayList getDataInt(){
+        return dataInt;
+    }
+
+    public IntListIterator createIterator(){
+        return dataInt.listIterator();
     }
 
 }

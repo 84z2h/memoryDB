@@ -9,6 +9,7 @@ com\dant\entity\CSVLoading.class
 com\dant\entity\dto\ColumnDTO.class
 com\dant\app\InsertEndpoint.class
 com\dant\entity\dto\TableDTO.class
+com\dant\entity\Client.class
 com\dant\entity\columns\ColumnInt.class
 com\dant\entity\Database.class
 com\dant\entity\Table.class

@@ -1,16 +1,35 @@
 package com.dant.entity.columns;
 
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
+import it.unimi.dsi.fastutil.booleans.BooleanListIterator;
+
 
 public class ColumnBoolean extends Column{
-    private ArrayList<String> dataString = new ArrayList<>();
 
-    public ColumnBoolean(String name, String type){
-        super(name, type);
+    private BooleanArrayList dataBool = new BooleanArrayList();
+
+    public ColumnBoolean(String name){
+        super(name, "boolean");
     }
 
-    public ArrayList<String> getDataString(){
-        return dataString;
+    public void add(boolean bool){
+        dataBool.add(bool);
+    }
+
+    public boolean get(int index){
+        return dataBool.getBoolean(index);
+    }
+
+    public int size(){
+        return dataBool.size();
+    }
+
+    public BooleanArrayList getDataBool(){
+        return dataBool;
+    }
+
+    public BooleanListIterator createIterator(){
+        return dataBool.listIterator();
     }
 
 }
