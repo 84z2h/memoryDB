@@ -1,11 +1,6 @@
 package com.dant.entity.columns;
 
-import com.dant.storage.BasicStorage;
-import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
-import java.lang.Math;
-import java.util.Locale;
 
 import static java.lang.Math.abs;
 

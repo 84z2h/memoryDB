@@ -3,6 +3,8 @@ package com.dant.storage;
 import com.dant.entity.*;
 import com.dant.entity.columns.Column;
 
+import java.util.Timer;
+
 public class BasicStorage {
     private static Database db;
 
@@ -105,7 +107,6 @@ public class BasicStorage {
         System.out.println("start select where data");
         TimerManage.start();
         Table t= BasicStorage.getTable(table_name);
-        //StringBuilder res = new StringBuilder();
         ResultSet result = new ResultSet();
         String[] split = whereclause.split("@@");
         // tableau de "column"
@@ -118,35 +119,35 @@ public class BasicStorage {
                 for(String subclause : and){
                     if(subclause.contains("=")){
                         String[] cond = subclause.split("=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains("<")){
                         String[] cond = subclause.split("<");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains(">")){
                         String[] cond = subclause.split(">");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains("<=")){
                         String[] cond = subclause.split("<=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
                         if(value.equals(cond[1])){
                             cpt++;
                         }
                     }
                     else if(subclause.contains(">=")){
                         String[] cond = subclause.split(">=");
-                        Object value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i);
+                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
                         if(value.equals(cond[1])){
                             cpt++;
                         }
@@ -157,8 +158,7 @@ public class BasicStorage {
                     String[] line = new String[cols.length];
                     int k=0;
                     for(String col: cols) {
-                        //res.append(BasicStorage.getColumn(table_name, col).getData().get((int) i));
-                        line[k] = (String) BasicStorage.getColumn(table_name, col).getData().get((int) i);
+                        line[k] = BasicStorage.getColumn(table_name, col).getData().get((int) i).toString();
                         k++;
                     }
                     result.addString(line);
