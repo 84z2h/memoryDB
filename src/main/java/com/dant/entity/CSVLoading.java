@@ -12,7 +12,7 @@ import java.io.*;
 
 public class CSVLoading {
 
-    public static String indentifyType(int columnId){
+    public static String identifyType(int columnId){
         String type;
         switch(columnId){
             case 0,1,2,7,8,11,14 :
@@ -42,7 +42,7 @@ public class CSVLoading {
         BasicStorage.setTable(table);
         for (int i = 0; i < columnsCsv.length; i++) {
             // MANQUE PARSING
-            String type = indentifyType(i);
+            String type = identifyType(i);
             BasicStorage.setColumn(csv_filename, new Column(columnsCsv[i], type));
         }
         TimerManage.pause();
