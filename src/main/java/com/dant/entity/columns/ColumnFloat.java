@@ -13,8 +13,7 @@ public class ColumnFloat extends Column{
     }
 
     public void add(float f){
-        String s = String.format("%.2f",f);
-        dataFloat.add(Float.valueOf(s.replace(',','.')));
+        dataFloat.add(f);
     }
 
     public float get(int index){

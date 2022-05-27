@@ -19,7 +19,7 @@ public class InsertEndpoint {
 
     @PUT
     @Path("/{db}/{table}")
-    public String createTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,
+    public String insertTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,
                               @QueryParam("limit") int limit, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
         return CSVLoading.insertTable(name_table, limit, in);

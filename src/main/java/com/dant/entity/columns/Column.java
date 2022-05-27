@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 
-public class Column {
+public class Column{
     protected String name;
     protected String type;
     private final ArrayList<Object> data = new ArrayList<>();
@@ -22,14 +22,13 @@ public class Column {
     public void setName(String name) {
         this.name = name;
     }
+
     public ArrayList<Object> getData(){
         return data;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public String toString(){
         String s = name+" "+type+" "+data.size();
         return s;
