@@ -9,7 +9,6 @@ com\dant\entity\CSVLoading.class
 com\dant\entity\dto\ColumnDTO.class
 com\dant\app\InsertEndpoint.class
 com\dant\entity\dto\TableDTO.class
-com\dant\entity\Client.class
 com\dant\entity\columns\ColumnInt.class
 com\dant\entity\Database.class
 com\dant\entity\Table.class
@@ -17,6 +16,7 @@ com\dant\storage\Storage.class
 com\dant\entity\columns\Column.class
 com\dant\entity\columns\ColumnByte.class
 com\dant\entity\columns\ColumnShort.class
+com\dant\entity\ServiceClient.class
 com\dant\entity\columns\ColumnChar.class
 com\dant\entity\columns\ColumnDouble.class
 com\dant\storage\BasicStorage.class
