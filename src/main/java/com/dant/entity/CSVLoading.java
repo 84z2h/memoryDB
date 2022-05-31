@@ -54,73 +54,29 @@ public class CSVLoading {
 
     public static String insertTable(String csv_filename, int max_size, InputStream input) throws IOException {
         System.out.println("start loading data");
-        BufferedReader in = new BufferedReader(new InputStreamReader(input));
         String s = null;
+        int j;
+        long i = 0;
         // TIMER START
         TimerManage.start();
-        s = in.readLine();
-        String[] columnsCsv = s.split(",");
         // Get Table
         Table table = BasicStorage.getTable(csv_filename);
-        // add columns to table
-        s = in.readLine();
-        long i = 0;
-        int j;
-        // load lines
-        Column column;
-        ArrayList<Object> row;
+        BufferedReader in = new BufferedReader(new InputStreamReader(input));
+        String firstLine = in.readLine();
+        in.readLine();
         while ((s = in.readLine()) != null && i < max_size) {
-            if(i % 100000 == 0){
+            if (i % 100000 == 0 && i != 0) {
                 System.out.println(i + " lines inserted");
             }
+            // load lines
             String[] line = s.split(",");
-            for(j = 0; j < columnsCsv.length;  j++) {
-                column = table.getColumns().get(columnsCsv[j]);
-                row = column.getData();
-                row.add(column.optimizeValue(line[j]));
+            for(String column_name: table.getColumns().keySet()) {
+                j = Column.getColumnNumber(column_name,firstLine);
+                table.getColumns().get(column_name).addElement(line[j]);
             }
             i++;
         }
-        System.out.println(i  + " lines have been inserted successfully");
-        table.setSize(table.getSize()+i);
-        // TIMER END
-        TimerManage.pause();
-        String Time = "Elapsed Time : " + TimerManage.getTime()+" ms\n";
-        Time += "Lines inserted : " + i;
-        System.out.println(Time);
         in.close();
-        return Time;
-    }
-
-    public static String insertTable2(String csv_filename, int max_size, InputStream input) throws IOException {
-        System.out.println("start loading data");
-        String s = null;
-        int j;
-        long i = 0;
-        // TIMER START
-        TimerManage.start();
-        // Get Table
-        Table table = BasicStorage.getTable(csv_filename);
-        BufferedReader temp = new BufferedReader(new InputStreamReader(input));
-        String firstLine = temp.readLine();
-        temp.close();
-        for(String column_name: table.getColumns().keySet()) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(input));
-            s = in.readLine();  s = in.readLine();
-            // load lines
-            i=0;
-            j = getColumnNumber(column_name,firstLine);
-            while ((s = in.readLine()) != null && i < max_size) {
-                if (i % 100000 == 0 && i != 0) {
-                    System.out.println(i + " lines inserted");
-                }
-                String[] line = s.split(",");
-                addElement(table,column_name,line[j]);
-                i++;
-            }
-            j++;
-            in.close();
-        }
         System.out.println(i  + " lines have been inserted successfully");
         table.setSize(table.getSize()+i);
         // TIMER END
@@ -131,51 +87,8 @@ public class CSVLoading {
         return Time;
     }
 
-    public static int getColumnNumber(String column_name, String firstLine){
-        List<String> head = Arrays.asList(firstLine.split(","));
-        return head.indexOf(column_name);
 
-    }
 
-    public static void addElement(Table table,String column_name, String data) {
-        String type = table.getColumns().get(column_name).getType();
-        switch (type) {
-            case "float":
-                ColumnFloat colFloat = (ColumnFloat) table.getColumns().get(column_name);
-                colFloat.add(Float.parseFloat(data));
-                break;
-            case "String":
-                ColumnString colString = (ColumnString) table.getColumns().get(column_name);
-                colString.add(data);
-                return;
-            case "byte":
-                ColumnByte colByte = (ColumnByte) table.getColumns().get(column_name);
-                colByte.add(Byte.parseByte(data));
-                break;
-            case "int":
-                ColumnInt colInt = (ColumnInt) table.getColumns().get(column_name);
-                colInt.add(Integer.parseInt(data));
-                break;
-            case "double":
-                ColumnDouble colDouble = (ColumnDouble) table.getColumns().get(column_name);
-                colDouble.add(Double.parseDouble(data));
-                break;
-            case "short":
-                ColumnShort colShort = (ColumnShort) table.getColumns().get(column_name);
-                colShort.add(Short.parseShort(data));
-                break;
-            case "long":
-                ColumnLong colLong = (ColumnLong) table.getColumns().get(column_name);
-                colLong.add(Long.parseLong(data));
-                break;
-            case "boolean":
-                ColumnBoolean colBoolean = (ColumnBoolean) table.getColumns().get(column_name);
-                colBoolean.add(Boolean.parseBoolean(data));
-                break;
-            default:
-                System.out.println("Type non pris en charge.");
-                break;
-        }
-    }
+
 
 }

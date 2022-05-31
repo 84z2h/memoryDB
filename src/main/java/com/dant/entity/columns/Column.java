@@ -1,13 +1,12 @@
 package com.dant.entity.columns;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static java.lang.Math.abs;
 
 public class Column{
     protected String name;
     protected String type;
-    private final ArrayList<Object> data = new ArrayList<>();
 
     public Column(String name, String type){
         this.name=name;
@@ -23,50 +22,79 @@ public class Column{
         this.name = name;
     }
 
-    public ArrayList<Object> getData(){
-        return data;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public String toString(){
-        String s = name+" "+type+" "+data.size();
-        return s;
-    }
-
-    public Object optimizeValue(String s){
-        switch(type){
-            case "double":
+    public void addElement(String data) {
+        switch (this.type) {
             case "float":
-                float f = Float.parseFloat(s);
-                s = String.format("%.2f",f);
-                f = Float.valueOf(s.replace(',','.'));
-                return f;
+                ColumnFloat colFloat = (ColumnFloat) this;
+                colFloat.add(Float.parseFloat(data));
+                break;
+            case "String":
+                ColumnString colString = (ColumnString) this;
+                colString.add(data);
+                return;
             case "byte":
-            case "short":
+                ColumnByte colByte = (ColumnByte) this;
+                colByte.add(Byte.parseByte(data));
+                break;
             case "int":
+                ColumnInt colInt = (ColumnInt) this;
+                colInt.add(Integer.parseInt(data));
+                break;
+            case "double":
+                ColumnDouble colDouble = (ColumnDouble) this;
+                colDouble.add(Double.parseDouble(data));
+                break;
+            case "short":
+                ColumnShort colShort = (ColumnShort) this;
+                colShort.add(Short.parseShort(data));
+                break;
             case "long":
-                int i = Integer.parseInt(s);
-                if (abs(i) < 126) {
-                    Byte b = Byte.parseByte(s);
-                    return b;
-                }
-                else if (abs(i)<32766){
-                    short sh = Short.parseShort(s);
-                    return sh;
-                }
-                else if (abs(i)<2147483646){
-                    return i;
-                }
-                else{
-                    long l = Long.parseLong(s);
-                    return l;
-                }
+                ColumnLong colLong = (ColumnLong) this;
+                colLong.add(Long.parseLong(data));
+                break;
             case "boolean":
-                boolean b = Boolean.parseBoolean(s);
-                return b;
+                ColumnBoolean colBoolean = (ColumnBoolean) this;
+                colBoolean.add(Boolean.parseBoolean(data));
+                break;
             default:
-                return s.toLowerCase();
+                System.out.println("Type non pris en charge.");
+                break;
         }
+    }
+    public String getElement(int line){
+        switch(this.type){
+            case "float":
+                ColumnFloat colFloat = (ColumnFloat) this;
+                return String.valueOf(colFloat.get(line));
+            case "String":
+                ColumnString colString = (ColumnString) this;
+                return colString.get(line);
+            case "byte":
+                ColumnByte colByte = (ColumnByte) this;
+                return String.valueOf(colByte.get(line));
+            case "int":
+                ColumnInt colInt = (ColumnInt) this;
+                return String.valueOf(colInt.get(line));
+            case "double":
+                ColumnDouble colDouble = (ColumnDouble) this;
+                return String.valueOf(colDouble.get(line));
+            case "short":
+                ColumnShort colShort = (ColumnShort) this;
+                return String.valueOf(colShort.get(line));
+            case "long":
+                ColumnLong colLong = (ColumnLong) this;
+                return String.valueOf(colLong.get(line));
+            case "boolean":
+                ColumnBoolean colBoolean = (ColumnBoolean) this;
+                return String.valueOf(colBoolean.get(line));
+            default:
+                System.out.println("Type non pris en charge.");
+                return null;
+        }
+    }
+    public static int getColumnNumber(String column_name, String firstLine){
+        List<String> head = Arrays.asList(firstLine.split(","));
+        return head.indexOf(column_name);
+
     }
 }

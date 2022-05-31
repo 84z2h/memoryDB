@@ -74,14 +74,15 @@ public class BasicStorage {
         System.out.println("start select data");
         TimerManage.start();
         ResultSet result = new ResultSet();
+        String[] line;
         Table t = BasicStorage.getTable(table_name);
         if(columnstab.equals("*")){ //SELECT ALL
             int j;
-            String[] line = new String[t.getColumns().keySet().size()];
             for(int i = 0; i < t.getSize();i++) {
+                line = new String[t.getColumns().keySet().size()];
                 j=0;
                 for (String key: t.getColumns().keySet()) {
-                    line[j] = t.getColumns().get(key).getData().get(i).toString();
+                    line[j] = t.getColumns().get(key).getElement(i);
                     j++;
                 }
                 result.addString(line);
@@ -89,10 +90,10 @@ public class BasicStorage {
         }else {
             String[] split = columnstab.split(",");
             int j;
-            String[] line = new String[split.length];
             for (int i = 0; i < t.getSize(); i++) {
+                line = new String[split.length];
                 for (j = 0; j < split.length; j++) {
-                    line[j] = t.getColumns().get(split[j]).getData().get(i).toString();
+                    line[j] = t.getColumns().get(split[j]).getElement(i);
                 }
                 result.addString(line);
             }
@@ -117,40 +118,10 @@ public class BasicStorage {
                 String[] and = split[j].split("&&");
                 int cpt=0;
                 for(String subclause : and){
-                    if(subclause.contains("=")){
-                        String[] cond = subclause.split("=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains("<")){
-                        String[] cond = subclause.split("<");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains(">")){
-                        String[] cond = subclause.split(">");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains("<=")){
-                        String[] cond = subclause.split("<=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
-                    }
-                    else if(subclause.contains(">=")){
-                        String[] cond = subclause.split(">=");
-                        String value = BasicStorage.getColumn(table_name,cond[0]).getData().get((int)i).toString();
-                        if(value.equals(cond[1])){
-                            cpt++;
-                        }
+                    String[] cond = subclause.split("=");
+                    String value = t.getColumns().get(cond[0]).getElement((int)i);
+                    if(value.equals(cond[1])){
+                        cpt++;
                     }
                 }
                 if(cpt==and.length){
@@ -158,7 +129,7 @@ public class BasicStorage {
                     String[] line = new String[cols.length];
                     int k=0;
                     for(String col: cols) {
-                        line[k] = BasicStorage.getColumn(table_name, col).getData().get((int) i).toString();
+                        line[k] = t.getColumns().get(col).getElement((int)i);
                         k++;
                     }
                     result.addString(line);
