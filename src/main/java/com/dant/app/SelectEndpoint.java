@@ -15,13 +15,13 @@ public class SelectEndpoint {
     @GET
     @Path("/{table}/{columns}")
     public ResultSet select(@PathParam("table") String tableParam, @PathParam("columns") String columns) throws IOException {
-        return BasicStorage.selectJson(tableParam, columns);
+        return BasicStorage.select(tableParam, columns);
     }
 
     @GET
     @Path("/{table}/{columns}/{whereclause}")
     public ResultSet where(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause){
-        return BasicStorage.select_whereJson(table, columns,whereclause);
+        return BasicStorage.select_where(table, columns,whereclause);
     }
 
     @GET
