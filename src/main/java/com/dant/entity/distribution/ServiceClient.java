@@ -5,10 +5,14 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServiceClient {
     private Client c1;
     private Client c2;
+
+    private final List<Node> nodes = new CopyOnWriteArrayList<>();
 
     public ServiceClient(){
         c1 = ClientBuilder.newClient();

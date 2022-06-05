@@ -83,4 +83,23 @@ class CreateEndpointTest {
 
         assertEquals(200, rep.getStatus());
     }
+
+    @Test
+    public void testInsertTable() throws Exception
+    {
+        ResteasyProviderFactory rpf = ResteasyProviderFactory.newInstance();
+        rpf.registerProvider(GsonProvider.class);
+        ResteasyClient client = new ResteasyClientBuilder().withConfig(rpf).build();
+
+        ResteasyWebTarget target = client.target("http://localhost:8080/api/insert/memoryDB/yellow_tripdata_2009-01?limit=1000000");
+
+        String time = "";
+
+        Response rep = target.request()
+                .header("Content-Type", "application/json")
+                .post(Entity
+                        .entity(time, "application/json"));
+
+        assertEquals(200, rep.getStatus());
+    }
 }
