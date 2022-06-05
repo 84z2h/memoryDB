@@ -24,21 +24,24 @@ public class Column{
 
     public void addElement(String data) {
         switch (this.type) {
-            case "float":
-                ColumnFloat colFloat = (ColumnFloat) this;
-                colFloat.add(Float.parseFloat(data));
-                break;
             case "String":
                 ColumnString colString = (ColumnString) this;
                 colString.add(data);
                 return;
-            case "byte":
-                ColumnByte colByte = (ColumnByte) this;
-                colByte.add(Byte.parseByte(data));
+            case "float":
+                ColumnFloat colFloat = (ColumnFloat) this;
+                colFloat.add(Float.parseFloat(data));
                 break;
             case "int":
                 ColumnInt colInt = (ColumnInt) this;
-                colInt.add(Integer.parseInt(data));
+                if(data!="")
+                    colInt.add(Integer.parseInt(data));
+                else
+                    colInt.add(-1);
+                break;
+            case "byte":
+                ColumnByte colByte = (ColumnByte) this;
+                colByte.add(Byte.parseByte(data));
                 break;
             case "double":
                 ColumnDouble colDouble = (ColumnDouble) this;

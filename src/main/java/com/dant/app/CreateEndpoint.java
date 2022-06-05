@@ -40,9 +40,7 @@ public class CreateEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
         Table table = tableDto.toTable();
-        Database db = new Database(nameDB);
-        db.getTables().put(table.getName(),table);
-        BasicStorage.setDb(db);
+        BasicStorage.getDb().getTables().put(table.getName(),table);
         return tableDto;
     }
 }

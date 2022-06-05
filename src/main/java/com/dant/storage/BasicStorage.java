@@ -70,7 +70,7 @@ public class BasicStorage {
     /* === Column Storage === */
 
     /* === SQLRequest === */
-    public static ResultSet selectJson(String table_name, String columnstab){
+    public static ResultSet select(String table_name, String columnstab){
         System.out.println("start select data");
         TimerManage.start();
         ResultSet result = new ResultSet();
@@ -104,7 +104,7 @@ public class BasicStorage {
         return result;
     }
 
-    public static ResultSet select_whereJson(String table_name, String columns, String whereclause){
+    public static ResultSet select_where(String table_name, String columns, String whereclause){
         System.out.println("start select where data");
         TimerManage.start();
         Table t= BasicStorage.getTable(table_name);

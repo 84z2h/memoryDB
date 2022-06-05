@@ -4,10 +4,6 @@ import com.dant.entity.columns.*;
 import com.dant.storage.BasicStorage;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class CSVLoading {
@@ -63,17 +59,18 @@ public class CSVLoading {
         Table table = BasicStorage.getTable(csv_filename);
         BufferedReader in = new BufferedReader(new InputStreamReader(input));
         String firstLine = in.readLine();
-        in.readLine();
         while ((s = in.readLine()) != null && i < max_size) {
             if (i % 100000 == 0 && i != 0) {
                 System.out.println(i + " lines inserted");
             }
             // load lines
-            String[] line = s.split(",");
+            String[] line = s.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
             for(String column_name: table.getColumns().keySet()) {
                 j = Column.getColumnNumber(column_name,firstLine);
                 table.getColumns().get(column_name).addElement(line[j]);
+
             }
+            line = null;
             i++;
         }
         in.close();
