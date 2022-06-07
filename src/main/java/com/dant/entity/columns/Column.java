@@ -96,7 +96,7 @@ public class Column{
         }
     }
     public static int getColumnNumber(String column_name, String firstLine){
-        List<String> head = Arrays.asList(firstLine.split(","));
+        List<String> head = Arrays.asList(firstLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
         return head.indexOf(column_name);
 
     }

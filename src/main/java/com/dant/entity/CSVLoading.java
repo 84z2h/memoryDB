@@ -5,7 +5,6 @@ import com.dant.storage.BasicStorage;
 
 import java.io.*;
 
-
 public class CSVLoading {
 
     public static String identifyType(int columnId){
@@ -68,7 +67,6 @@ public class CSVLoading {
             for(String column_name: table.getColumns().keySet()) {
                 j = Column.getColumnNumber(column_name,firstLine);
                 table.getColumns().get(column_name).addElement(line[j]);
-
             }
             line = null;
             i++;
@@ -83,9 +81,4 @@ public class CSVLoading {
         System.out.println(Time);
         return Time;
     }
-
-
-
-
-
 }
