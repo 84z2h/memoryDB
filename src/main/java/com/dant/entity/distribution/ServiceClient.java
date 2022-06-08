@@ -43,8 +43,8 @@ public class ServiceClient {
     public static List<String> getNodes_Name(){
         return nodes_Name;
     }
-    public static List<Response> multiPostRequests(String apiEndpoint, String mediaType, Object body, MultivaluedMap<String, Object> queryParameters) {
-        if (body==null) {
+    public static List<Response> multiPostRequests(String apiEndpoint, String mediaType, Object obj, MultivaluedMap<String, Object> queryParameters) {
+        if (obj==null) {
             return null ;
         }
 
@@ -52,7 +52,7 @@ public class ServiceClient {
         nodes_Name.forEach(address ->
             callable.add(() -> {
                 ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
-                return target.request().post(Entity.entity(body, mediaType));}
+                return target.request().post(Entity.entity(obj, mediaType));}
             )
         );
 
@@ -74,9 +74,9 @@ public class ServiceClient {
         }
         return listRes;
     }
-    public static Response singlePostRequest(String fullEndpoint, Object body, MultivaluedMap<String, Object> queryParameters){
+    public static Response singlePostRequest(String fullEndpoint, Object obj, MultivaluedMap<String, Object> queryParameters){
         ResteasyWebTarget target = ServiceClient.client.target(fullEndpoint);
-        return target.queryParams(queryParameters).request().post(Entity.entity(body, "application/json"));
+        return target.queryParams(queryParameters).request().post(Entity.entity(obj, "application/json"));
     }
     public static List<Response> multiGetRequests(String apiEndpoint,MultivaluedMap<String, Object> queryParameters) {
         List<Callable<Response>> callable = new ArrayList<>();
