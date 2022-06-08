@@ -21,17 +21,23 @@ public class InsertEndpoint {
     @PUT
     @Path("/{db}/{table}")
     public String insertTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,
-                              @QueryParam("limit") int limit, InputStream in) throws IOException {
+                              @QueryParam("limit") int limit, @QueryParam("distributed") boolean distrib,
+                              @QueryParam("paquets") int alternate, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        return CSVLoading.insertTable(name_table, limit, in);
+        if(distrib){
+            return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
+        }else{
+            return CSVLoading.insertTable(name_table, limit, in);
+        }
     }
-
+/*
     @PUT
-    @Path("/Distributed/{db}/{table}/")
+    @Path("/{db}/{table}/")
     public String insertTableDistributed(@PathParam("db") String nameDB, @PathParam("table") String name_table,
                               @QueryParam("limit") int limit, @QueryParam("paquets") int alternate, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
         System.out.println("inserted");
         return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
     }
+ */
 }
