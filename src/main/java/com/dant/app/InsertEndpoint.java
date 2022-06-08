@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,20 +25,12 @@ public class InsertEndpoint {
                               @QueryParam("limit") int limit, @QueryParam("distributed") boolean distrib,
                               @QueryParam("paquets") int alternate, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
+        System.out.println("TEST");
         if(distrib){
             return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
         }else{
             return CSVLoading.insertTable(name_table, limit, in);
         }
     }
-/*
-    @PUT
-    @Path("/{db}/{table}/")
-    public String insertTableDistributed(@PathParam("db") String nameDB, @PathParam("table") String name_table,
-                              @QueryParam("limit") int limit, @QueryParam("paquets") int alternate, InputStream in) throws IOException {
-        //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        System.out.println("inserted");
-        return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
-    }
- */
+
 }

@@ -78,7 +78,7 @@ public class DistributionManage {
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
             map.add("table", table_name);
             map.add("db",nameDB);
-            ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + "/api/insert/Distributed/", lines, map);
+            ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + "/api/insert", lines, map);
         }
     }
 }

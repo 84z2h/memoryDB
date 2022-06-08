@@ -48,25 +48,13 @@ public class CreateEndpoint {
         BasicStorage.setDb(db);
         Table table = tableDto.toTable();
         BasicStorage.getDb().getTables().put(table.getName(),table);
+        System.out.println("TEST");
         if(distrib){
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
-            map.add("distrib", false);
-            ServiceClient.multiPostRequests("/api/"+nameDB+"/json","application/json", table, map);
+            map.add("distributed", false);
+            ServiceClient.multiPostRequests("/api/"+nameDB+"/json","application/json", tableDto, map);
         }
         return tableDto;
     }
-/*
-    @POST
-    @Path("/{db}/jsonDistributed")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public TableDTO createTableDistributed(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
-        Table table = tableDto.toTable();
-        System.out.println("TEST");
-        BasicStorage.getDb().getTables().put(table.getName(), table);
-        MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
-        ServiceClient.multiPostRequests("/api/"+nameDB+"/jsonDistributed","application/json", table, map);
-        return tableDto;
-    }
- */
+
 }
