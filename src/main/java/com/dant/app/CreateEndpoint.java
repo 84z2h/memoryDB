@@ -41,7 +41,6 @@ public class CreateEndpoint {
 
     @POST
     @Path("/{db}/json")
-    @Consumes("application/json")
     @Produces(MediaType.APPLICATION_JSON)
     public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto,@QueryParam("distributed") Boolean distrib) throws IOException {
         Database db = new Database(nameDB);
@@ -52,7 +51,7 @@ public class CreateEndpoint {
         if(distrib){
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
             map.add("distributed", false);
-            ServiceClient.multiPostRequests("/api/"+nameDB+"/json","application/json", tableDto, map);
+            ServiceClient.multiPostRequests("/api/"+nameDB+"/json",MediaType.APPLICATION_JSON, tableDto, map);
         }
         return tableDto;
     }

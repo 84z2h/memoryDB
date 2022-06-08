@@ -45,6 +45,7 @@ public class DistributionManage {
                 DistributionManage.distributed(nameDB ,csv_filename, cpt_alternate, columns, lines, j);
                 lines = new ArrayList<>();
                 cpt_alternate++;
+                System.out.println("----- Reached a total of " + cpt_alternate + " lines. -----");
             }
         }
         DistributionManage.distributed(nameDB,csv_filename, 0, columns, lines,j);
@@ -62,9 +63,11 @@ public class DistributionManage {
     public static void distributed(String nameDB,String table_name, int cpt, List<String> columns, List<String> lines, int nbColumns) {
         if (cpt%(ServiceClient.getNbNode() +1)==0) {
             if (lines.size()==0) {
+                System.out.println("TEST2");
                 return ;
             }
             // add rows
+            System.out.println("TEST");
             Table table = BasicStorage.getTable(table_name);
             for (String row: lines) {
                 String[] line = row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
@@ -73,6 +76,7 @@ public class DistributionManage {
                     table.getColumns().get(column_name).addElement(line[nbColumns]);
                 }
             }
+            System.out.println("Done Calling - inserted : " + lines.size());
         }
         else {
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
