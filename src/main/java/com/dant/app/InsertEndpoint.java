@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 @Path("/api/insert")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes("text/csv")
+@Consumes({"text/csv","text/plain"})
 public class InsertEndpoint {
 
     @PUT

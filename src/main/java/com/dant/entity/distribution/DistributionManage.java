@@ -45,7 +45,6 @@ public class DistributionManage {
                 DistributionManage.distributed(nameDB ,csv_filename, cpt_alternate, columns, lines, j);
                 lines = new ArrayList<>();
                 cpt_alternate++;
-                System.out.println("----- Reached a total of " + cpt_alternate + " lines. -----");
             }
         }
         DistributionManage.distributed(nameDB,csv_filename, 0, columns, lines,j);
