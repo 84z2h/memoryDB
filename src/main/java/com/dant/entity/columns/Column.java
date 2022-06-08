@@ -5,6 +5,7 @@ import java.util.List;
 
 
 public class Column{
+    /* Classe pour une colonne de la table, avec son nom et son type */
     protected String name;
     protected String type;
 
@@ -13,15 +14,20 @@ public class Column{
         this.type=type;
     }
 
+    // Get Name
     public String getName() { return name; }
+
+    // Getter Type
     public String getType() {
         return type;
     }
 
+    // Setter Name
     public void setName(String name) {
         this.name = name;
     }
 
+    // Gère l'ajout d'un élement dans une colonne pour tout les types de colonnes existant
     public void addElement(String data) {
         switch (this.type) {
             case "String":
@@ -64,6 +70,8 @@ public class Column{
                 break;
         }
     }
+
+    // Retourne la ieme ligne d'une colonne selon son type
     public String getElement(int line){
         switch(this.type){
             case "float":
@@ -95,6 +103,8 @@ public class Column{
                 return null;
         }
     }
+
+    // Retourne le numéro de la colonne souhaité
     public static int getColumnNumber(String column_name, String firstLine){
         List<String> head = Arrays.asList(firstLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
         return head.indexOf(column_name);

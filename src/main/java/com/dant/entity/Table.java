@@ -13,13 +13,24 @@ public class Table{
         this.name = name;
         size=0;
     }
+
+    // Getter Name
     public String getName() { return name; }
+
+    //Setter Name
     public void setName(String name) { this.name = name; }
+
+    //Getter Name
     public HashMap<String, Column> getColumns() { return columns; }
+
+    //Getter Size
     public long getSize() {return size;}
+
+    //Setter Size
     public void setSize(long size) {this.size = size;}
 
     @Override
+    //ToString Table
     public String toString() {
         return "Table{" +
                 "name='" + name + '\'' +

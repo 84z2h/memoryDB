@@ -17,21 +17,27 @@ public class ResultSet {
                 '}';
     }
 
+    // Getter Data
     public List<String[]> getData() {
         return data;
     }
+
+    // Setter Data
     public void setData(List<String[]> data) {
         this.data = data;
     }
 
+    // Getter ième ligne Data
     public String[] getLine(int i){
         return data.get(i);
     }
 
+    //Getter size of Data
     public int getSize(){
         return data.size();
     }
 
+    // Ajout d'un élement à Data
     public void addString(String[] str){
         data.add(str);
     }
