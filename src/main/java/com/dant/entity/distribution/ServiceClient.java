@@ -50,11 +50,9 @@ public class ServiceClient {
 
         List<Callable<Response>> callable = new ArrayList<>();
         nodes_Name.forEach(address ->
-            callable.add(
-                () -> {
-                    ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
-                    return target.request(mediaType).post(Entity.json(body));
-                }
+            callable.add(() -> {
+                ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
+                return target.request().post(Entity.entity(body, mediaType));}
             )
         );
 
@@ -91,7 +89,6 @@ public class ServiceClient {
                 }
             )
         );
-
         List<Response> listRes = null;
         try{
             listRes = executors.invokeAll(callable).stream().map(

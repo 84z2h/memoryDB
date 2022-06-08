@@ -73,9 +73,8 @@ public class DistributionManage {
         }
         else {
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
-            map.add("tableName", table_name);
-            //InternalLines internalLines = new InternalLines(columns,lines) ;
-            //ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + LocalEndpointsPaths.INSERT, internalLines, map);
+            map.add("table_name", table_name);
+            ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + "/api/insert", null, map);
         }
     }
 }
