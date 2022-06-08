@@ -33,8 +33,8 @@ public class ServiceClient {
         providerFactory.registerProvider(GsonProvider.class);
         client = new ResteasyClientBuilder().withConfig(providerFactory).build();
 
-        nodes_Name.add("ip2");
-        nodes_Name.add("ip3");
+        nodes_Name.add("http://192.168.1.56:8081");
+        //nodes_Name.add("ip3");
     }
 
     public static int getNbNode(){
@@ -50,11 +50,9 @@ public class ServiceClient {
 
         List<Callable<Response>> callable = new ArrayList<>();
         nodes_Name.forEach(address ->
-            callable.add(
-                () -> {
-                    ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
-                    return target.request(mediaType).post(Entity.json(body));
-                }
+            callable.add(() -> {
+                ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
+                return target.request().post(Entity.entity(body, mediaType));}
             )
         );
 
@@ -91,7 +89,6 @@ public class ServiceClient {
                 }
             )
         );
-
         List<Response> listRes = null;
         try{
             listRes = executors.invokeAll(callable).stream().map(

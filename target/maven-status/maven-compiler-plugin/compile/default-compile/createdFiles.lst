@@ -1,11 +1,14 @@
 com\dant\app\CreateEndpoint.class
 com\dant\entity\columns\ColumnBoolean.class
+com\dant\entity\distribution\ServiceClient.class
 com\dant\app\SelectEndpoint.class
 Main.class
 com\dant\exception\RuntimeExceptionMapper.class
 com\dant\app\App.class
 com\dant\entity\columns\ColumnLong.class
+com\dant\entity\distribution\Node.class
 com\dant\entity\CSVLoading.class
+com\dant\entity\distribution\DistributionManage.class
 com\dant\entity\dto\ColumnDTO.class
 com\dant\app\InsertEndpoint.class
 com\dant\entity\dto\TableDTO.class
