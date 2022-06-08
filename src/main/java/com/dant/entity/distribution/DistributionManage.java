@@ -5,6 +5,8 @@ import com.dant.entity.ResultSet;
 import com.dant.entity.Table;
 import com.dant.entity.TimerManage;
 import com.dant.entity.columns.Column;
+import com.dant.entity.dto.ColumnDTO;
+import com.dant.entity.dto.TableDTO;
 import com.dant.storage.BasicStorage;
 import org.jboss.resteasy.specimpl.MultivaluedMapImpl;
 
@@ -20,7 +22,7 @@ import java.util.List;
 
 public class DistributionManage {
 
-    public static String insertTableDistribution(String csv_filename, int max_size, InputStream input, int alternate) throws IOException {
+    public static String insertTableDistribution(String nameDB,String csv_filename, int max_size, InputStream input, int alternate) throws IOException {
         System.out.println("start loading data");
         String s = null;
         int j = 0;
@@ -40,11 +42,12 @@ public class DistributionManage {
             lines.add(s);
             i++;
             if(i % alternate==0){
-                DistributionManage.distributed(csv_filename, cpt_alternate, columns, lines, j);
+                DistributionManage.distributed(nameDB ,csv_filename, cpt_alternate, columns, lines, j);
                 lines = new ArrayList<>();
                 cpt_alternate++;
             }
         }
+        DistributionManage.distributed(nameDB,csv_filename, 0, columns, lines,j);
         in.close();
         System.out.println(i  + " lines have been inserted successfully");
         table.setSize(table.getSize()+i);
@@ -56,12 +59,14 @@ public class DistributionManage {
         return Time;
     }
 
-    public static void distributed(String table_name, int cpt, List<String> columns, List<String> lines, int nbColumns) {
+    public static void distributed(String nameDB,String table_name, int cpt, List<String> columns, List<String> lines, int nbColumns) {
         if (cpt%(ServiceClient.getNbNode() +1)==0) {
             if (lines.size()==0) {
+                System.out.println("TEST2");
                 return ;
             }
             // add rows
+            System.out.println("TEST");
             Table table = BasicStorage.getTable(table_name);
             for (String row: lines) {
                 String[] line = row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
@@ -70,11 +75,13 @@ public class DistributionManage {
                     table.getColumns().get(column_name).addElement(line[nbColumns]);
                 }
             }
+            System.out.println("Done Calling - inserted : " + lines.size());
         }
         else {
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
-            map.add("table_name", table_name);
-            ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + "/api/insert", null, map);
+            map.add("table", table_name);
+            map.add("db",nameDB);
+            ServiceClient.singlePostRequest(ServiceClient.getNodes_Name().get(cpt%(ServiceClient.getNbNode()+1)-1) + "/api/insert", lines, map);
         }
     }
 }

@@ -43,8 +43,8 @@ public class ServiceClient {
     public static List<String> getNodes_Name(){
         return nodes_Name;
     }
-    public static List<Response> multiPostRequests(String apiEndpoint, String mediaType, Object body, MultivaluedMap<String, Object> queryParameters) {
-        if (body==null) {
+    public static List<Response> multiPostRequests(String apiEndpoint, String mediaType, Object obj, MultivaluedMap<String, Object> queryParameters) {
+        if (obj==null) {
             return null ;
         }
 
@@ -52,7 +52,7 @@ public class ServiceClient {
         nodes_Name.forEach(address ->
             callable.add(() -> {
                 ResteasyWebTarget target = ServiceClient.client.target(address + apiEndpoint).queryParams(queryParameters);
-                return target.request().post(Entity.entity(body, mediaType));}
+                return target.request().post(Entity.entity(obj, mediaType));}
             )
         );
 
@@ -74,9 +74,9 @@ public class ServiceClient {
         }
         return listRes;
     }
-    public static Response singlePostRequest(String fullEndpoint, Object body, MultivaluedMap<String, Object> queryParameters){
+    public static Response singlePostRequest(String fullEndpoint, Object obj, MultivaluedMap<String, Object> queryParameters){
         ResteasyWebTarget target = ServiceClient.client.target(fullEndpoint);
-        return target.queryParams(queryParameters).request().post(Entity.entity(body, "application/json"));
+        return target.queryParams(queryParameters).request().put(Entity.entity(obj, MediaType.APPLICATION_JSON));
     }
     public static List<Response> multiGetRequests(String apiEndpoint,MultivaluedMap<String, Object> queryParameters) {
         List<Callable<Response>> callable = new ArrayList<>();
@@ -127,44 +127,4 @@ public class ServiceClient {
         }
         return genericList ;
     }
-
-
-    /*
-    private Client c1;
-    private Client c2;
-
-    private final List<Node> nodes = new CopyOnWriteArrayList<>();
-
-    public ServiceClient(){
-        c1 = ClientBuilder.newClient();
-        c2 = ClientBuilder.newClient();
-    }
-    @Override
-    public String toString() {
-        return "ServiceClient{" +
-                "c1=" + c1 +
-                ", c2=" + c2 +
-                '}';
-    }
-    public Client getC1() {return c1;}
-    public Client getC2() {return c2;}
-
-    public String clientGET(String ip1, String ip2, String uri){
-        String res = c1.target("https://"+ip1+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).get(String.class);
-        res += c2.target("https://"+ip2+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).get(String.class);
-        return res;
-    }
-    public void clientPUT(String ip1, String ip2, String uri, Object obj){
-        c1.target("https://"+ip1+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).put(Entity.json(obj));
-        c2.target("https://"+ip2+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).put(Entity.json(obj));
-    }
-    public void clientPOST(String ip1, String ip2, String uri, Object obj){
-        c1.target("https://"+ip1+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).post(Entity.json(obj));
-        c2.target("https://"+ip2+":"+"8080"+uri).request(MediaType.APPLICATION_JSON).post(Entity.json(obj));
-    }
-    public void closeClients(){
-        c1.close();
-        c2.close();
-    }
-    */
 }

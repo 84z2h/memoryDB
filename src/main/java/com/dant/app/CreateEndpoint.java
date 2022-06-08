@@ -45,9 +45,17 @@ public class CreateEndpoint {
     @Path("/{db}/json")
     @Produces(MediaType.APPLICATION_JSON)
     // Création d'une table depuis un JSON pour une db donné
-    public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
+    public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto,@QueryParam("distributed") Boolean distrib) throws IOException {
+        Database db = new Database(nameDB);
+        BasicStorage.setDb(db);
         Table table = tableDto.toTable();
         BasicStorage.getDb().getTables().put(table.getName(),table);
+        System.out.println("TEST");
+        if(distrib){
+            MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
+            map.add("distributed", false);
+            ServiceClient.multiPostRequests("/api/"+nameDB+"/json",MediaType.APPLICATION_JSON, tableDto, map);
+        }
         return tableDto;
     }
 
