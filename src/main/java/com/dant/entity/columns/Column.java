@@ -28,16 +28,16 @@ public class Column{
                 ColumnString colString = (ColumnString) this;
                 colString.add(data);
                 return;
-            case "float":
-                ColumnFloat colFloat = (ColumnFloat) this;
-                colFloat.add(Float.parseFloat(data));
-                break;
             case "int":
                 ColumnInt colInt = (ColumnInt) this;
                 if(data!="")
                     colInt.add(Integer.parseInt(data));
                 else
                     colInt.add(-1);
+                break;
+            case "float":
+                ColumnFloat colFloat = (ColumnFloat) this;
+                colFloat.add(Float.parseFloat(data));
                 break;
             case "byte":
                 ColumnByte colByte = (ColumnByte) this;

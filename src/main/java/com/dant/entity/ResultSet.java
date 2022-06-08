@@ -24,6 +24,14 @@ public class ResultSet {
         this.data = data;
     }
 
+    public String[] getLine(int i){
+        return data.get(i);
+    }
+
+    public int getSize(){
+        return data.size();
+    }
+
     public void addString(String[] str){
         data.add(str);
     }

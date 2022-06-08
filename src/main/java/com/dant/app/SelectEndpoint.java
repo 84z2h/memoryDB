@@ -25,6 +25,12 @@ public class SelectEndpoint {
     }
 
     @GET
+    @Path("/{table}/{columns}/{whereclause}/{groupby}")
+    public ResultSet groupby(@PathParam("table") String table, @PathParam("columns") String columns, @PathParam("whereclause") String whereclause,@PathParam("groupby") String groupby){
+        return BasicStorage.select_where_groupby(table, columns,whereclause,groupby);
+    }
+
+    @GET
     @Path("/exception")
     public Response exception() {
         throw new RuntimeException("Mon erreur");

@@ -3,7 +3,7 @@ package com.dant.storage;
 import com.dant.entity.*;
 import com.dant.entity.columns.Column;
 
-import java.util.Timer;
+import java.util.*;
 
 public class BasicStorage {
     private static Database db;
@@ -136,6 +136,41 @@ public class BasicStorage {
                     clause = true;
                 }
                 j++;
+            }
+        }
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
+        System.out.println("end select data");
+        return result;
+    }
+
+    public static ResultSet select_where_groupby(String table_name, String columns, String whereclause,String groupby){
+        System.out.println("start select where groupby data");
+        TimerManage.start();
+        String[] groupby_columns = groupby.split(",");
+        String s = "";
+        for(String col : groupby_columns){
+            if(!columns.contains(col))
+                s += ","+col;
+        }
+        ResultSet result_where_groupby = select_where(table_name,columns+s,whereclause);
+        ResultSet result_where = select_where(table_name,columns,whereclause);
+        //HashMap<String, Integer> column_number = new HashMap<>();//index des colonnes dans column+s
+        List<String> cols = Arrays.asList((columns+s).split(","));//Ordre des colones pour obtenir l'index
+        /*for(String col : cols){
+            column_number.put(col, cols.indexOf(col));
+        }*/
+        List<String> groups = new ArrayList<>();
+        ResultSet result = new ResultSet();
+        for(int i = 0;i<result_where_groupby.getSize();i++){
+            String[] list = result_where_groupby.getLine(i);
+            String group = "";
+            for(String groupby_column: groupby_columns){
+                group += list[cols.indexOf(groupby_column)];
+            }
+            if(!groups.contains(group)){
+                groups.add(group);
+                result.addString(result_where.getLine(i));
             }
         }
         TimerManage.pause();
