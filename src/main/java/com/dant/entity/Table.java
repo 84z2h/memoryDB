@@ -29,6 +29,11 @@ public class Table{
     //Setter Size
     public void setSize(long size) {this.size = size;}
 
+    //For testing purposes
+    public void addColumnToColumns(String key, Column column){
+        this.columns.put(key, column);
+    }
+
     @Override
     //ToString Table
     public String toString() {
