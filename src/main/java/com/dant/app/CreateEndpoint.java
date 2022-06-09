@@ -25,6 +25,7 @@ public class CreateEndpoint {
     @POST
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
+    // Gère de la création d'une base de donnée
     public Database createDB(@PathParam("name") String nameDB) throws IOException {
         Database db = new Database(nameDB);
         BasicStorage.setDb(db);
@@ -34,6 +35,7 @@ public class CreateEndpoint {
     @POST
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
+    // Création d'une table pour une db donné
     public Table createTable(@PathParam("db") String nameDB, @PathParam("table") String name_table) throws IOException {
         Table table =CSVLoading.createTable(name_table);
         return table;
@@ -42,6 +44,7 @@ public class CreateEndpoint {
     @POST
     @Path("/{db}/json")
     @Produces(MediaType.APPLICATION_JSON)
+    // Création d'une table depuis un JSON pour une db donné
     public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto,@QueryParam("distributed") Boolean distrib) throws IOException {
         Database db = new Database(nameDB);
         BasicStorage.setDb(db);
@@ -56,4 +59,17 @@ public class CreateEndpoint {
         return tableDto;
     }
 
+    @POST
+    @Path("/{db}/jsonDistributed")
+    @Consumes("application/json")
+    @Produces("application/json")
+    // Création d'une table en distribué
+    public TableDTO createTableDistributed(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
+        Table table = tableDto.toTable();
+        System.out.println("TEST");
+        BasicStorage.getDb().getTables().put(table.getName(), table);
+        MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
+        ServiceClient.multiPostRequests("/api/"+nameDB+"/jsonDistributed","application/json", table, map);
+        return tableDto;
+    }
 }

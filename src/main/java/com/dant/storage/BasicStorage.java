@@ -144,7 +144,7 @@ public class BasicStorage {
         return result;
     }
 
-    public static ResultSet select_where_groupby(String table_name, String columns, String whereclause,String groupby){
+    public static ResultSet select_where_groupby(String table_name, String columns, String whereclause,String groupby,boolean count){
         System.out.println("start select where groupby data");
         TimerManage.start();
         String[] groupby_columns = groupby.split(",");
@@ -155,12 +155,11 @@ public class BasicStorage {
         }
         ResultSet result_where_groupby = select_where(table_name,columns+s,whereclause);
         ResultSet result_where = select_where(table_name,columns,whereclause);
-        //HashMap<String, Integer> column_number = new HashMap<>();//index des colonnes dans column+s
-        List<String> cols = Arrays.asList((columns+s).split(","));//Ordre des colones pour obtenir l'index
-        /*for(String col : cols){
-            column_number.put(col, cols.indexOf(col));
-        }*/
+        List<String> cols = Arrays.asList((columns+s).split(","));//columns order to get indexes
         List<String> groups = new ArrayList<>();
+
+        List<Integer> counter = new ArrayList<>();//not used if count = false
+
         ResultSet result = new ResultSet();
         for(int i = 0;i<result_where_groupby.getSize();i++){
             String[] list = result_where_groupby.getLine(i);
@@ -170,7 +169,19 @@ public class BasicStorage {
             }
             if(!groups.contains(group)){
                 groups.add(group);
+                if(count)
+                    counter.add(1);
                 result.addString(result_where.getLine(i));
+            }
+            else{
+                if(count) {
+                    counter.set(groups.indexOf(group), groups.indexOf(group) + 1);
+                }
+            }
+        }
+        if(count){
+            for(int i = 0;i<result.getSize();i++){
+                //result.addElementToLine(i,counter.get(i).toString());
             }
         }
         TimerManage.pause();

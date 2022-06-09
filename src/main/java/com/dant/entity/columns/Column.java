@@ -64,6 +64,7 @@ public class Column{
                 break;
         }
     }
+
     public String getElement(int line){
         switch(this.type){
             case "float":
@@ -95,6 +96,7 @@ public class Column{
                 return null;
         }
     }
+
     public static int getColumnNumber(String column_name, String firstLine){
         List<String> head = Arrays.asList(firstLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
         return head.indexOf(column_name);

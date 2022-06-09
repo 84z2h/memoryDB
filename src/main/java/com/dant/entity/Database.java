@@ -11,11 +11,18 @@ public class Database {
     private final HashMap<String, Table> tables = new HashMap<>();
 
     public Database(String name) {this.name = name;}
+
+    // Getter Tables
     public HashMap<String,Table> getTables() { return tables; }
+
+    // Getter Name
     public String getName() { return name; }
+
+    // Setter Name
     public void setName(String name) { this.name = name; }
 
     @Override
+    // To String Database
     public String toString() {
         return "Database{" +
                 "name='" + name + '\'' +

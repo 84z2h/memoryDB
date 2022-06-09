@@ -21,6 +21,7 @@ public class InsertEndpoint {
 
     @PUT
     @Path("/{db}/{table}")
+    // Insertion d'une table
     public String insertTable(@PathParam("db") String nameDB, @PathParam("table") String name_table,
                               @QueryParam("limit") int limit, @QueryParam("distributed") boolean distrib,
                               @QueryParam("paquets") int alternate, InputStream in) throws IOException {
