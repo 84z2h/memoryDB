@@ -13,11 +13,18 @@ public class Table{
         this.name = name;
         size=0;
     }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public HashMap<String, Column> getColumns() { return columns; }
     public long getSize() {return size;}
     public void setSize(long size) {this.size = size;}
+
+    //For testing purposes
+    public void addColumnToColumns(String key, Column column){
+        this.columns.put(key, column);
+    }
+
 
     @Override
     public String toString() {
