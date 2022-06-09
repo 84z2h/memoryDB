@@ -19,7 +19,7 @@ public class SelectEndpoint {
     // Requete Select, prend en parametre une list de columns à selectionner
     public ResultSet select(@PathParam("table") String tableParam, @PathParam("columns") String columns, @QueryParam("distributed") boolean distrib) throws Exception {
         if(distrib){
-            return DistributionManage.selectDistributed(tableParam,columns);
+                return null;
         }else {
             return BasicStorage.select(tableParam, columns);
         }

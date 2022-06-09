@@ -33,7 +33,7 @@ public class ServiceClient {
         providerFactory.registerProvider(GsonProvider.class);
         client = new ResteasyClientBuilder().withConfig(providerFactory).build();
 
-        //nodes_Name.add("http://132.227.124.73:8081");
+        nodes_Name.add("http://132.227.124.73:8081");
         nodes_Name.add("http://132.227.124.74:8082");
     }
 

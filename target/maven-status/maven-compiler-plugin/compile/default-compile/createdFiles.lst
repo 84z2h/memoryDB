@@ -6,7 +6,6 @@ Main.class
 com\dant\exception\RuntimeExceptionMapper.class
 com\dant\app\App.class
 com\dant\entity\columns\ColumnLong.class
-com\dant\entity\distribution\Node.class
 com\dant\entity\CSVLoading.class
 com\dant\entity\distribution\DistributionManage.class
 com\dant\entity\dto\ColumnDTO.class

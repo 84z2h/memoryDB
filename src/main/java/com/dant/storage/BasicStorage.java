@@ -186,7 +186,7 @@ public class BasicStorage {
         }
         TimerManage.pause();
         System.out.println("Time : " + TimerManage.getTime()+" ms");
-        System.out.println("end select data");
+        System.out.println("end select groupby data");
         return result;
     }
     /* === SQLRequest === */
