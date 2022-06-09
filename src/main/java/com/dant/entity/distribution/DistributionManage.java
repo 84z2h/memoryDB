@@ -24,10 +24,9 @@ import java.util.List;
 public class DistributionManage {
 
 
-    public static String insertTableDistribution(String nameDB,String csv_filename, int max_size, InputStream input, int alternate) throws IOException {
+    public static String insertTableDistribution(String csv_filename, int max_size, InputStream input, int alternate) throws IOException {
         System.out.println("start loading data");
         String s = null;
-        int j = 0;
         long i = 0;
         // TIMER START
         TimerManage.start();
@@ -38,6 +37,7 @@ public class DistributionManage {
 
         String[] columnsSplited = firstLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         List<String> columns = Arrays.asList(columnsSplited);
+
         List<String> lines =  new ArrayList<>();
         int cpt_alternate  = 0;
         while ((s = in.readLine()) != null && i < max_size) {
@@ -47,6 +47,7 @@ public class DistributionManage {
                 DistributionManage.distributed(csv_filename, cpt_alternate, columns, lines);
                 lines = new ArrayList<>();
                 cpt_alternate++;
+                System.out.println("Reached a total of " +i+ " line");
             }
         }
         DistributionManage.distributed(csv_filename, 0, columns, lines);

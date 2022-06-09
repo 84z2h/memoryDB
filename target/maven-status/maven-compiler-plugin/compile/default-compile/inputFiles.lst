@@ -7,6 +7,7 @@ C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\columns\C
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\distribution\Node.java
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\columns\ColumnFloat.java
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\Database.java
+C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\dto\RowsDTO.java
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\entity\dto\TableDTO.java
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\exception\RuntimeExceptionMapper.java
 C:\Users\Mikec\Documents\GitHub\memoryDB\src\main\java\com\dant\app\SelectEndpoint.java

@@ -28,19 +28,19 @@ public class InsertEndpoint {
                               @QueryParam("paquets") int alternate, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
         if(distrib){
-            return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
+            return DistributionManage.insertTableDistribution(name_table, limit, in, alternate);
         }else{
             return CSVLoading.insertTable(name_table, limit, in);
         }
     }
 
-    @PUT
+    @POST
     @Path("/InNode")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response insertingNode( RowsDTO rowsDTO, @QueryParam("table") String tableName){
+    public String insertingNode( RowsDTO rowsDTO, @QueryParam("table") String tableName){
         DistributionManage.insertingNode(tableName, rowsDTO.getColumns(), rowsDTO.getLines()); ;
-        return Response.ok().build() ;
+        return "ok";
     }
 
 }
