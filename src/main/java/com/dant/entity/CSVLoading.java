@@ -7,6 +7,7 @@ import java.io.*;
 
 public class CSVLoading {
 
+    // Idenitifie le type de la colunme selon son id
     public static String identifyType(int columnId){
         String type;
         switch(columnId){
@@ -23,6 +24,7 @@ public class CSVLoading {
         return type;
     }
 
+    // Gère tout ce qui touche à la création d'une nouvelle table dans le programme
     public static Table createTable(String csv_filename) throws IOException {
         System.out.println("start loading data");
         BufferedReader in = new BufferedReader(new FileReader("src\\main\\resources\\" + csv_filename + ".csv"));
@@ -47,6 +49,7 @@ public class CSVLoading {
         return table;
     }
 
+    // Gère tout ce qui touche à l'insertion d'une table dans le programme
     public static String insertTable(String csv_filename, int max_size, InputStream input) throws IOException {
         System.out.println("start loading data");
         String s = null;
