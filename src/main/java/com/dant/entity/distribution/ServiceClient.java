@@ -76,7 +76,7 @@ public class ServiceClient {
     }
     public static Response singlePostRequest(String fullEndpoint, Object obj, MultivaluedMap<String, Object> queryParameters){
         ResteasyWebTarget target = ServiceClient.client.target(fullEndpoint);
-        return target.queryParams(queryParameters).request().put(Entity.entity(obj, "text/plain"));
+        return target.queryParams(queryParameters).request().put(Entity.entity(obj, "application/json"));
     }
     public static List<Response> multiGetRequests(String apiEndpoint,MultivaluedMap<String, Object> queryParameters) {
         List<Callable<Response>> callable = new ArrayList<>();

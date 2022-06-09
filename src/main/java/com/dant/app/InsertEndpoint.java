@@ -4,6 +4,7 @@ import com.dant.entity.Database;
 import com.dant.entity.Table;
 import com.dant.entity.CSVLoading;
 import com.dant.entity.distribution.DistributionManage;
+import com.dant.entity.dto.RowsDTO;
 import org.javatuples.Triplet;
 
 import javax.ws.rs.*;
@@ -16,7 +17,7 @@ import java.io.InputStream;
 
 @Path("/api/insert")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes({"text/csv","text/plain"})
+@Consumes("text/csv")
 public class InsertEndpoint {
 
     @PUT
@@ -31,6 +32,15 @@ public class InsertEndpoint {
         }else{
             return CSVLoading.insertTable(name_table, limit, in);
         }
+    }
+
+    @PUT
+    @Path("/InNode")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response insertingNode( RowsDTO rowsDTO, @QueryParam("table") String tableName){
+        DistributionManage.insertingNode(tableName, rowsDTO.getColumns(), rowsDTO.getLines()); ;
+        return Response.ok().build() ;
     }
 
 }

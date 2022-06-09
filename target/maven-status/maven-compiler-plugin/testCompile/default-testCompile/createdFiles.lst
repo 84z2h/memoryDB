@@ -1,2 +1,3 @@
+com\dant\entity\columns\ColumnTest.class
 com\dant\entity\CSVLoadingTest.class
 com\dant\app\CreateEndpointTest.class
