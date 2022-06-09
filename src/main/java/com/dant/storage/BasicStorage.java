@@ -155,10 +155,10 @@ public class BasicStorage {
         }
         ResultSet result_where_groupby = select_where(table_name,columns+s,whereclause);
         ResultSet result_where = select_where(table_name,columns,whereclause);
-        List<String> cols = Arrays.asList((columns+s).split(","));//columns order to get indexes
+        List<String> cols = Arrays.asList((columns+s).split(","));//Ordre des colones pour obtenir l'index
         List<String> groups = new ArrayList<>();
 
-        List<Integer> counter = new ArrayList<>();//not used if count = false
+        List<Integer> counter = new ArrayList<>();//pas utilisé si count = false
 
         ResultSet result = new ResultSet();
         for(int i = 0;i<result_where_groupby.getSize();i++){
@@ -175,13 +175,13 @@ public class BasicStorage {
             }
             else{
                 if(count) {
-                    counter.set(groups.indexOf(group), groups.indexOf(group) + 1);
+                    counter.set(groups.indexOf(group), counter.get(groups.indexOf(group))+1 );
                 }
             }
         }
         if(count){
             for(int i = 0;i<result.getSize();i++){
-                //result.addElementToLine(i,counter.get(i).toString());
+                result.addElementToLine(i,counter.get(i).toString());
             }
         }
         TimerManage.pause();

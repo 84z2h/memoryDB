@@ -27,9 +27,11 @@ public class ResultSet {
     }
 
     public void addElementToLine(int i,String elem) {
-        List<String> list = Arrays.asList(data.get(i));
-        list.add(elem);
-        this.setData(i, list.toArray(new String[0]));
+        String[] line = data.get(i);
+        String[] newline = new String[line.length +1];
+        System.arraycopy(line,0,newline,0,line.length);
+        newline[line.length] = elem;
+        this.setData(i,newline);
     }
 
     // Getter ième ligne Data
@@ -46,4 +48,16 @@ public class ResultSet {
     public void addString(String[] str){
         data.add(str);
     }
+
+    public static void main(String[] args){
+        String[] tab = {"un","deux","trois"};
+        List<String> tab2 = Arrays.asList(tab);
+        tab2.add("quatre");
+        String[] tab3 = tab2.toArray(new String[0]);
+        for(int i =0;i<tab3.length;i++){
+            System.out.println(tab3[i]);
+
+        }
+    }
+
 }
