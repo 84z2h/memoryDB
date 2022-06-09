@@ -10,6 +10,7 @@ public class BasicStorage {
 
     /* === Database Storage === */
     public static Database getDb() {return db;}
+    public static void setDb(Database db) {BasicStorage.db = db;}
     // enleve toutes les tables
     public static void removeDb(){
         db.getTables().clear();
