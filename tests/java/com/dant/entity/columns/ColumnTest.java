@@ -24,7 +24,7 @@ class ColumnTest {
         Column column = new Column("testInt", "int");
         String data = "3";
 
-        table.addColumnToColumns("test", column);
+        //table.addColumnToColumns("test", column);
 
         column.addElement(data);
 
