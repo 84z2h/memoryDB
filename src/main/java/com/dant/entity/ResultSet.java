@@ -18,6 +18,7 @@ public class ResultSet {
                 '}';
     }
 
+    // Getter Data
     public List<String[]> getData() {
         return data;
     }
@@ -25,20 +26,23 @@ public class ResultSet {
         data.set(i, newData);
     }
 
-    public void addElementToLine(int i,String elem){
+    public void addElementToLine(int i,String elem) {
         List<String> list = Arrays.asList(data.get(i));
         list.add(elem);
-        this.setData(i,list.toArray(new String[0]));
+        this.setData(i, list.toArray(new String[0]));
     }
 
+    // Getter ième ligne Data
     public String[] getLine(int i){
         return data.get(i);
     }
 
+    //Getter size of Data
     public int getSize(){
         return data.size();
     }
 
+    // Ajout d'un élement à Data
     public void addString(String[] str){
         data.add(str);
     }

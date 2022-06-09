@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 @Path("/api/insert")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes({"text/csv",MediaType.APPLICATION_JSON})
+@Consumes({"text/csv","text/plain"})
 public class InsertEndpoint {
 
     @PUT
@@ -26,7 +26,6 @@ public class InsertEndpoint {
                               @QueryParam("limit") int limit, @QueryParam("distributed") boolean distrib,
                               @QueryParam("paquets") int alternate, InputStream in) throws IOException {
         //if(BasicStorage.getDb().getName() != nameDB){ return null; }
-        System.out.println("TEST");
         if(distrib){
             return DistributionManage.insertTableDistribution(nameDB ,name_table, limit, in, alternate);
         }else{

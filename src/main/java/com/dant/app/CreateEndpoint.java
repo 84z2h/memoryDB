@@ -50,7 +50,6 @@ public class CreateEndpoint {
         BasicStorage.setDb(db);
         Table table = tableDto.toTable();
         BasicStorage.getDb().getTables().put(table.getName(),table);
-        System.out.println("TEST");
         if(distrib){
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
             map.add("distributed", false);
