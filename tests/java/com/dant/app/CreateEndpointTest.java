@@ -49,6 +49,8 @@ class CreateEndpointTest {
         assertEquals(200, rep.getStatus());
     }
 
+    /*
+
     @Test
     public void testInsertTable() throws Exception
     {
@@ -79,5 +81,5 @@ class CreateEndpointTest {
                         .entity(table,"application/json" ));
 
         assertEquals(200, rep.getStatus());
-    }
+    }*/
 }

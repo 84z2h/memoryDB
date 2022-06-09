@@ -14,9 +14,9 @@ class CSVLoadingTest {
 
     @Test
     void insertTableTest() throws IOException {
-        String csv_file = "yellow_tripdata_2009-01_compressed.csv";
+        String csv_file = "ghtorrent-2019-01-07_compressed.csv";
         int limit = 30000;
-        InputStream is = new FileInputStream(new File("src/main/resources/yellow_tripdata_2009-01_compressed.csv"));
+        InputStream is = new FileInputStream(new File("src/main/resources/ghtorrent-2019-01-07_compressed.csv"));
 
         BasicStorage.setDb(new Database("test"));
         BasicStorage.setTable(new Table(csv_file));
@@ -28,8 +28,6 @@ class CSVLoadingTest {
         HashMap<String, Column> columns = table.getColumns();
 
         assertEquals(csv_file, table.getName());
-
-        //assertEquals("vendor_name", columns.get(1));
     }
 
 
