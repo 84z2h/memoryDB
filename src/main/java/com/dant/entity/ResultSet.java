@@ -49,15 +49,4 @@ public class ResultSet {
         data.add(str);
     }
 
-    public static void main(String[] args){
-        String[] tab = {"un","deux","trois"};
-        List<String> tab2 = Arrays.asList(tab);
-        tab2.add("quatre");
-        String[] tab3 = tab2.toArray(new String[0]);
-        for(int i =0;i<tab3.length;i++){
-            System.out.println(tab3[i]);
-
-        }
-    }
-
 }
