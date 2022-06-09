@@ -6,10 +6,9 @@ import com.dant.entity.columns.Column;
 import java.util.*;
 
 public class BasicStorage {
-    private static Database db;
+    private static Database db = new Database("memoryDB");
 
     /* === Database Storage === */
-    public static void setDb(Database db) {BasicStorage.db = db;}
     public static Database getDb() {return db;}
     // enleve toutes les tables
     public static void removeDb(){

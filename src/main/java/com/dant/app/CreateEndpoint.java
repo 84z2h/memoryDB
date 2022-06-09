@@ -21,7 +21,7 @@ import java.security.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CreateEndpoint {
-
+/*
     @POST
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,7 +31,7 @@ public class CreateEndpoint {
         BasicStorage.setDb(db);
         return db;
     }
-
+*/
     @POST
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,29 +46,14 @@ public class CreateEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     // Création d'une table depuis un JSON pour une db donné
     public TableDTO createTableWithJson(@PathParam("db") String nameDB, TableDTO tableDto,@QueryParam("distributed") Boolean distrib) throws IOException {
-        Database db = new Database(nameDB);
-        BasicStorage.setDb(db);
         Table table = tableDto.toTable();
         BasicStorage.getDb().getTables().put(table.getName(),table);
         if(distrib){
             MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
             map.add("distributed", false);
-            ServiceClient.multiPostRequests("/api/"+nameDB+"/json",MediaType.APPLICATION_JSON, tableDto, map);
+            ServiceClient.multiPostRequests("/api/create/"+nameDB+"/json",MediaType.APPLICATION_JSON, tableDto, map);
         }
         return tableDto;
     }
 
-    @POST
-    @Path("/{db}/jsonDistributed")
-    @Consumes("application/json")
-    @Produces("application/json")
-    // Création d'une table en distribué
-    public TableDTO createTableDistributed(@PathParam("db") String nameDB, TableDTO tableDto) throws IOException {
-        Table table = tableDto.toTable();
-        System.out.println("TEST");
-        BasicStorage.getDb().getTables().put(table.getName(), table);
-        MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
-        ServiceClient.multiPostRequests("/api/"+nameDB+"/jsonDistributed","application/json", table, map);
-        return tableDto;
-    }
 }
