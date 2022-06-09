@@ -118,6 +118,7 @@ public class ServiceClient {
             return response.readEntity(genericClass);
         }
     }
+
     public static List<Object> readRawResponses(List<Response> responses, Class<?> genericClass) throws Exception {
         if (responses==null) {return null ;}
         List<Object> genericList = new ArrayList<>();

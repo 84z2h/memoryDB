@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -86,5 +87,42 @@ public class DistributionManage {
                 table.getColumns().get(column_name).addElement(line[nbColumns]);
             }
         }
+    }
+    public static ResultSet selectDistributed(String table_name, String columnstab) throws Exception {
+        MultivaluedMap<String, Object> map = new MultivaluedMapImpl<>();
+        map.add("distributed", false);
+        System.out.println("start select data");
+        TimerManage.start();
+        String[] line;
+        Table t = BasicStorage.getTable(table_name);
+        ResultSet result = BasicStorage.select(table_name,columnstab);
+        List<Response> res = ServiceClient.multiPostRequests("/api/select/"+table_name+"/"+columnstab, "application/json", result, map);
+
+        if(columnstab.equals("*")){ //SELECT ALL
+            int j;
+            for(int i = 0; i < t.getSize();i++) {
+                line = new String[t.getColumns().keySet().size()];
+                j=0;
+                for (String key: t.getColumns().keySet()) {
+                    line[j] = t.getColumns().get(key).getElement(i);
+                    j++;
+                }
+                result.addString(line);
+            }
+        }else {
+            String[] split = columnstab.split(",");
+            int j;
+            for (int i = 0; i < t.getSize(); i++) {
+                line = new String[split.length];
+                for (j = 0; j < split.length; j++) {
+                    line[j] = t.getColumns().get(split[j]).getElement(i);
+                }
+                result.addString(line);
+            }
+        }
+        TimerManage.pause();
+        System.out.println("Time : " + TimerManage.getTime()+" ms");
+        System.out.println("end select data");
+        return result;
     }
 }

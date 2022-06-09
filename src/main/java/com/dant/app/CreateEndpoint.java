@@ -21,17 +21,7 @@ import java.security.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CreateEndpoint {
-/*
-    @POST
-    @Path("/{name}")
-    @Produces(MediaType.APPLICATION_JSON)
-    // Gère de la création d'une base de donnée
-    public Database createDB(@PathParam("name") String nameDB) throws IOException {
-        Database db = new Database(nameDB);
-        BasicStorage.setDb(db);
-        return db;
-    }
-*/
+
     @POST
     @Path("/{db}/{table}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -1,7 +1,9 @@
 package com.dant.app;
 
 import com.dant.entity.ResultSet;
+import com.dant.entity.distribution.DistributionManage;
 import com.dant.storage.BasicStorage;
+import org.jboss.resteasy.annotations.Query;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,8 +17,12 @@ public class SelectEndpoint {
     @GET
     @Path("/{table}/{columns}")
     // Requete Select, prend en parametre une list de columns à selectionner
-    public ResultSet select(@PathParam("table") String tableParam, @PathParam("columns") String columns) throws IOException {
-        return BasicStorage.select(tableParam, columns);
+    public ResultSet select(@PathParam("table") String tableParam, @PathParam("columns") String columns, @QueryParam("distributed") boolean distrib) throws Exception {
+        if(distrib){
+            return DistributionManage.selectDistributed(tableParam,columns);
+        }else {
+            return BasicStorage.select(tableParam, columns);
+        }
     }
 
     @GET
